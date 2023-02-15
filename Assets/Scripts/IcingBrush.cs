@@ -120,6 +120,11 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         }
 
         isTouchingCake = nib_obj.GetComponent<NibOnCake>().isTouching;
+
+        if (!isTouchingCake)
+        {
+            UnUse(grasped);
+        }
     }
 
 }
