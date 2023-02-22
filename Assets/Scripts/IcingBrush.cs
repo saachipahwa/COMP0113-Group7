@@ -16,6 +16,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     private bool owner;
     private bool isTouchingCake = false;
     private bool isUsing;
+    private Vector3 prevNibPos;
 
     public void Grasp(Hand controller)
     {
@@ -43,40 +44,28 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
 
     private void BeginDrawing() 
     {
-        // while (isUsing)
-        // {
-        //     Vector3 prevPos = new Vector3(0f, 0f, 0f);
-        //     if (isTouchingCake)
-        //     {
-                // var trail = currentDrawing.AddComponent<TrailRenderer>();
-                // trail.time = Mathf.Infinity;
-                // trail.material = drawingMaterial;
-                // trail.startWidth = .1f;
-                // trail.endWidth = .1f;
-                // trail.minVertexDistance = .02f;
-
-                // currentDrawing.transform.parent = nib.transform;
-                // currentDrawing.transform.localPosition = Vector3.zero;
-                // currentDrawing.transform.localRotation = Quaternion.identity;
-                // if (prevPos != nib.transform.position)
-                // {
-                //     GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                //     sphere.transform.position = nib.transform.position;
-                //     sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                //     prevPos = sphere.transform.position;
-                // }
-
-            // }
-        // }
         // currentDrawing = new GameObject("Drawing");
+        // if (isTouchingCake)
+        // {
+        //     var trail = currentDrawing.AddComponent<TrailRenderer>();
+        //     trail.time = Mathf.Infinity;
+        //     trail.material = drawingMaterial;
+        //     trail.startWidth = .1f;
+        //     trail.endWidth = .1f;
+        //     trail.minVertexDistance = .02f;
+
+        //     currentDrawing.transform.parent = nib.transform;
+        //     currentDrawing.transform.localPosition = Vector3.zero;
+        //     currentDrawing.transform.localRotation = Quaternion.identity;
+        // }
     } 
     
     private void EndDrawing()
     {
-        // var trail = currentDrawing.GetComponent<TrailRenderer>();
-        // currentDrawing.transform.parent = null;
-        // currentDrawing.GetComponent<TrailRenderer>().emitting = false;
-        // currentDrawing = null;
+        var trail = currentDrawing.GetComponent<TrailRenderer>();
+        currentDrawing.transform.parent = null;
+        currentDrawing.GetComponent<TrailRenderer>().emitting = false;
+        currentDrawing = null;
     }
 
     struct Message
@@ -116,6 +105,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         var shader = Shader.Find("Particles/Standard Surface");
         drawingMaterial = new Material(shader);
         drawingMaterial.SetColor("_Color", Color.red); // sets colour, TODO: add to menu
+        prevNibPos = new Vector3(0f, 0f, 0f);
     }
 
     private void FixedUpdate()
@@ -127,10 +117,9 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
 
         if (isUsing)
         {
-            Vector3 prevPos = new Vector3(0f, 0f, 0f);
             if (isTouchingCake)
             {
-                if (prevPos != nib.transform.position)
+                if (prevNibPos != nib.transform.position)
                 {
                     GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     sphere.name = "Icing";
@@ -138,7 +127,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
                     meshRenderer.material.color = Color.red;
                     sphere.transform.position = nib.transform.position;
                     sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                    prevPos = sphere.transform.position;
+                    prevNibPos = sphere.transform.position;
                 }
             }
         }
