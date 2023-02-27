@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
 using Ubiq.XR;
 using Ubiq.Messaging;
 
@@ -65,10 +64,10 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     
     private void EndDrawing()
     {
-        var trail = currentDrawing.GetComponent<TrailRenderer>();
-        currentDrawing.transform.parent = null;
-        currentDrawing.GetComponent<TrailRenderer>().emitting = false;
-        currentDrawing = null;
+        // var trail = currentDrawing.GetComponent<TrailRenderer>();
+        // currentDrawing.transform.parent = null;
+        // currentDrawing.GetComponent<TrailRenderer>().emitting = false;
+        // currentDrawing = null;
     }
 
     struct Message
@@ -102,8 +101,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
     void Start()
     {
-        nib = transform.Find("PipingTip/Nib");
-        nib_obj = GameObject.Find("Nib");
+        nib = transform.Find("PipingTip/Nib"); //just the transform
+        nib_obj = GameObject.Find("Nib"); //the object itself
         context = NetworkScene.Register(this);
         var shader = Shader.Find("Particles/Standard Surface");
         drawingMaterial = new Material(shader);
@@ -126,15 +125,14 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
                 if (prevNibPos != nib.transform.position)
                 {
                     // GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    Quaternion icingRotation = nib.transform.rotation;
-                    icingRotation.y += 90;
-                    GameObject sphere = Instantiate(starIcingTip, nib.transform.position, icingRotation);
+                    //below line sets rotation of sphere to be the same as nibs
+                    GameObject sphere = Instantiate(starIcingTip, nib.transform.position, nib.transform.rotation); 
                     sphere.name = "Icing";
                     MeshRenderer meshRenderer = sphere.GetComponent<MeshRenderer>();
                     meshRenderer.material.color = Color.red;
                     sphere.transform.position = nib.transform.position;
-                    // sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                    // sphere.transform.localScale = new Vector3(2f, 2f, 2f);
+                    // sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); //for circles
+                    sphere.transform.localScale = new Vector3(3f, 3f, 3f); //for stars
                     prevNibPos = sphere.transform.position;
                     icingSpheres.Add(sphere);
                 }
