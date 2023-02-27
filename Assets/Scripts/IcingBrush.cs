@@ -17,6 +17,9 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     private bool isTouchingCake = false;
     private bool isUsing;
     private Vector3 prevNibPos;
+    private List<GameObject> icingSpheres;
+
+    public GameObject starIcingTip;
 
     public void Grasp(Hand controller)
     {
@@ -106,6 +109,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         drawingMaterial = new Material(shader);
         drawingMaterial.SetColor("_Color", Color.red); // sets colour, TODO: add to menu
         prevNibPos = new Vector3(0f, 0f, 0f);
+        icingSpheres = new List<GameObject>();
     }
 
     private void FixedUpdate()
@@ -121,13 +125,18 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
             {
                 if (prevNibPos != nib.transform.position)
                 {
-                    GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    // GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    Quaternion icingRotation = nib.transform.rotation;
+                    icingRotation.y += 90;
+                    GameObject sphere = Instantiate(starIcingTip, nib.transform.position, icingRotation);
                     sphere.name = "Icing";
                     MeshRenderer meshRenderer = sphere.GetComponent<MeshRenderer>();
                     meshRenderer.material.color = Color.red;
                     sphere.transform.position = nib.transform.position;
-                    sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                    // sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                    // sphere.transform.localScale = new Vector3(2f, 2f, 2f);
                     prevNibPos = sphere.transform.position;
+                    icingSpheres.Add(sphere);
                 }
             }
         }
