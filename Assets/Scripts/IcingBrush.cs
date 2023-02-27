@@ -65,10 +65,10 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     
     private void EndDrawing()
     {
-        var trail = currentDrawing.GetComponent<TrailRenderer>();
-        currentDrawing.transform.parent = null;
-        currentDrawing.GetComponent<TrailRenderer>().emitting = false;
-        currentDrawing = null;
+        // var trail = currentDrawing.GetComponent<TrailRenderer>();
+        // currentDrawing.transform.parent = null;
+        // currentDrawing.GetComponent<TrailRenderer>().emitting = false;
+        // currentDrawing = null;
     }
 
     struct Message
