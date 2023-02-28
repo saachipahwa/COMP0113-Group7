@@ -10,6 +10,8 @@ public class SprayCan : MonoBehaviour, IGraspable, IUseable
 
     public bool isUsing;
 
+    private Transform head;
+    private Texture2D img;
     // NetworkContext context;
 
     public void Grasp(Hand controller)
@@ -34,6 +36,8 @@ public class SprayCan : MonoBehaviour, IGraspable, IUseable
     void Start()
     {
         // context = NetworkScene.Register(this);
+        head = transform.Find("Head");
+        img = new Texture2D(100, 100, TextureFormat.RGBA32, false);
     }
 
     struct Message
@@ -52,9 +56,9 @@ public class SprayCan : MonoBehaviour, IGraspable, IUseable
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask) && (hit.collider.tag == "Cake"))
+        if (Physics.Raycast(head.position, head.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask) && (hit.collider.tag == "Cake"))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            Debug.DrawRay(head.position, head.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             Debug.Log("Did Hit");
             // Texture2D tMap = (Texture2D)hit.collider.GetComponent<Renderer>().material.mainTexture;
             // int x = Mathf.FloorToInt(hit.point.x);
@@ -62,23 +66,80 @@ public class SprayCan : MonoBehaviour, IGraspable, IUseable
 
             // Color pColor = tMap.GetPixel(x , y);
             // requiredComponents.CollisionEvents.PixelColor = pColor;
+            // Texture2D tex = rend.material.mainTexture as Texture2D;
+            // Vector2 pixelUV = hit.textureCoord;
+            // pixelUV.x *= tex.width;
+            // pixelUV.y *= tex.height;
+
+            // tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.black);
+            // tex.Apply();
             Renderer rend = hit.transform.GetComponent<Renderer>();
             MeshCollider meshCollider = hit.collider as MeshCollider;
 
-            if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
-                return;
+            // if (rend == null || rend.sharedMaterial == null || meshCollider == null)
+            // {
+            //     return;
+            // }
 
-            Texture2D tex = rend.material.mainTexture as Texture2D;
-            Vector2 pixelUV = hit.textureCoord;
-            pixelUV.x *= tex.width;
-            pixelUV.y *= tex.height;
 
-            tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.black);
-            tex.Apply();
+            if (rend.sharedMaterial.mainTexture == null)
+            {
+                rend.material.SetTexture("_MainTex", img);
+            }
+            
+            for (int x = 0; x < 10; x++)
+            {
+                for (int y = 10; y < 50; y++)
+                {
+                    img.SetPixel(x, y, Color.yellow);
+                }
+            }
+            for (int x = 10; x < 50; x++)
+            {
+                for (int y = 0; y < 10; y++)
+                {
+                    img.SetPixel(x, y, Color.yellow);
+                }
+                for (int y = 10; y < 50; y++)
+                {
+                    img.SetPixel(x, y, Color.blue);
+                }
+                for (int y = 50; y < 60; y++)
+                {
+                    img.SetPixel(x, y, Color.yellow);
+                }
+            }
+            for (int x = 50; x < 60; x++)
+            {
+                for (int y = 10; y < 50; y++)
+                {
+                    img.SetPixel(x, y, Color.yellow);
+                }
+            }
+            for (int x = 60; x < 100; x++)
+            {
+                for (int y = 10; y < 50; y++)
+                {
+                    img.SetPixel(x, y, Color.blue);
+                }
+            }
+            
+            img.Apply();
+            
+            // Texture2D texture2D = rend.material.mainTexture as Texture2D;
+            // Renderer renderer = hit.collider.GetComponent<MeshRenderer>();
+            // Vector2 pCoord = hit.textureCoord;
+            // pCoord.x *= texture2D.width;
+            // pCoord.y *= texture2D.height;
+
+            // Vector2 tiling = renderer.material.mainTextureScale;
+            // Color color = texture2D.GetPixel(Mathf.FloorToInt(pCoord.x * tiling.x) , Mathf.FloorToInt(pCoord.y * tiling.y));
+
+            // Debug.Log("Picked color : " + color);
         }
         else
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+            Debug.DrawRay(head.position, head.TransformDirection(Vector3.forward) * 1000, Color.white);
             Debug.Log("Did not Hit");
         }
     }

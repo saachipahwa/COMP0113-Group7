@@ -125,9 +125,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4098792761335754731}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.305, z: 0}
-  m_LocalScale: {x: 0.188, y: 0.188, z: 0.188}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0.356, z: 0}
+  m_LocalScale: {x: 0.188, y: 0.12541291, z: 0.188}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4126499088012738813}
   m_RootOrder: 1
@@ -205,6 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4126499088012738813}
+  - component: {fileID: 8351027166937833036}
   m_Layer: 0
   m_Name: Spraycan
   m_TagString: Untagged
@@ -230,6 +231,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8351027166937833036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691325917176961539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8e826b4f98b98c4dba5fbdd6e51c897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsing: 0
 --- !u!1 &9014934830614319586
 GameObject:
   m_ObjectHideFlags: 0
