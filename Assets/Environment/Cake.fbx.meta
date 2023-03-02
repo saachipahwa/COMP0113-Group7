@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 183712a5c7d810744a567ff72bc94e45
+guid: 6152de78e5656b448b5c47b382d28441
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,48 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat1
-    second: {fileID: 2100000, guid: 8ab1ad6039b136b45b125f8de84e2ca0, type: 2}
+      name: 039BE5
+    second: {fileID: 2100000, guid: 8a41bd858b4da9e4e9fa1f5381229af5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat16
-    second: {fileID: 2100000, guid: 25d630126b76bf540acb23fc2f18d569, type: 2}
+      name: F06292
+    second: {fileID: 2100000, guid: 5d451d085e827c64b8b2a2db9bfe921a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat17
-    second: {fileID: 2100000, guid: 09f287ed2fe30c64aaa64bd1a11e36d3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat21
-    second: {fileID: 2100000, guid: 8f84f86e0791a6742977142d321e30f4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat23
-    second: {fileID: 2100000, guid: 888206b2c6b5fde4087f858c5c2ed855, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat3
-    second: {fileID: 2100000, guid: deb8a3bde142b9844ae0da815524c05b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat4
-    second: {fileID: 2100000, guid: b597f7cd12ebf4d4c9f2ac3fefaee775, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat5
-    second: {fileID: 2100000, guid: 3aafda5f2958ba14dad24b180de05e90, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat8
-    second: {fileID: 2100000, guid: 0952620205fa2ee4fba7765fa70e8eea, type: 2}
+      name: FFFFFF
+    second: {fileID: 2100000, guid: 50d77b893b7bbdf41bd66a5dc4fe093e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

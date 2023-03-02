@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 183712a5c7d810744a567ff72bc94e45
+guid: 16e2086efa018554ab0239ff554224b2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,48 +7,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat1
-    second: {fileID: 2100000, guid: 8ab1ad6039b136b45b125f8de84e2ca0, type: 2}
+      name: mat15
+    second: {fileID: 2100000, guid: 7aed329ee4711de46b42eb666514ff58, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat16
-    second: {fileID: 2100000, guid: 25d630126b76bf540acb23fc2f18d569, type: 2}
+      name: mat18
+    second: {fileID: 2100000, guid: 84526f38be2a3b74cb740907cad0ca9a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat17
-    second: {fileID: 2100000, guid: 09f287ed2fe30c64aaa64bd1a11e36d3, type: 2}
+      name: mat19
+    second: {fileID: 2100000, guid: 3f2bd38b2d478dd4e91dc9bc733c5c45, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat21
-    second: {fileID: 2100000, guid: 8f84f86e0791a6742977142d321e30f4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat23
-    second: {fileID: 2100000, guid: 888206b2c6b5fde4087f858c5c2ed855, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat3
-    second: {fileID: 2100000, guid: deb8a3bde142b9844ae0da815524c05b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat4
-    second: {fileID: 2100000, guid: b597f7cd12ebf4d4c9f2ac3fefaee775, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat5
-    second: {fileID: 2100000, guid: 3aafda5f2958ba14dad24b180de05e90, type: 2}
+      name: mat6
+    second: {fileID: 2100000, guid: 2f444dcf560b3bf44896d7bbdb291df8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: mat8
-    second: {fileID: 2100000, guid: 0952620205fa2ee4fba7765fa70e8eea, type: 2}
+    second: {fileID: 2100000, guid: d1c712b97b73df94c951ebb662d06547, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat9
+    second: {fileID: 2100000, guid: 11300e3343241a7418e9bf2136333603, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
