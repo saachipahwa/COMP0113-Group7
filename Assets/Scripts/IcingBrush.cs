@@ -127,12 +127,14 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
                     // GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     //below line sets rotation of sphere to be the same as nibs
                     GameObject sphere = Instantiate(starIcingTip, nib.transform.position, nib.transform.rotation); 
+                    sphere.transform.Rotate(90, 0, 0);
                     sphere.name = "Icing";
+                    sphere.tag = "Cake";
                     MeshRenderer meshRenderer = sphere.GetComponent<MeshRenderer>();
                     meshRenderer.material.color = Color.red;
                     sphere.transform.position = nib.transform.position;
                     // sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); //for circles
-                    sphere.transform.localScale = new Vector3(3f, 3f, 3f); //for stars
+                    sphere.transform.localScale = new Vector3(10f, 10f, 10f); //for stars
                     prevNibPos = sphere.transform.position;
                     icingSpheres.Add(sphere);
                 }
