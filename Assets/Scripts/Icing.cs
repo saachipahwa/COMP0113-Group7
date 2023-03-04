@@ -42,7 +42,7 @@ public class Icing : MonoBehaviour
         var m = message.FromJson<Message>();
 
         // Use the message to update the Component
-        transform.localPosition = m.transform.position;
-        transform.localRotation = m.transform.rotation;
+        transform.position = m.transform.position;
+        transform.rotation = m.transform.rotation;
     }
 }
