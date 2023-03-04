@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ubiq.XR;
 using Ubiq.Messaging;
+using Ubiq.Spawning;
 
-public class IcingBrush : MonoBehaviour, IGraspable, IUseable 
+public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
 {
     Hand grasped;
     NetworkContext context;
@@ -16,9 +17,11 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     private bool isTouchingCake = false;
     private bool isUsing;
     private Vector3 prevNibPos;
-    private List<GameObject> icingSpheres;
-
-    public GameObject starIcingTip;
+    private List<GameObject> icingObjects;
+    public GameObject[] icingTips; //[sphere, star]
+    public NetworkId NetworkId { get; set; }
+    private Vector3 lastPosition;
+    private Quaternion lastRotation;
 
     public void Grasp(Hand controller)
     {
@@ -35,39 +38,11 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     public void Use(Hand controller) 
     {
         isUsing = true;
-        BeginDrawing();
     }
 
     public void UnUse(Hand controller)
     {
         isUsing = false;
-        EndDrawing();
-    }
-
-    private void BeginDrawing() 
-    {
-        // currentDrawing = new GameObject("Drawing");
-        // if (isTouchingCake)
-        // {
-        //     var trail = currentDrawing.AddComponent<TrailRenderer>();
-        //     trail.time = Mathf.Infinity;
-        //     trail.material = drawingMaterial;
-        //     trail.startWidth = .1f;
-        //     trail.endWidth = .1f;
-        //     trail.minVertexDistance = .02f;
-
-        //     currentDrawing.transform.parent = nib.transform;
-        //     currentDrawing.transform.localPosition = Vector3.zero;
-        //     currentDrawing.transform.localRotation = Quaternion.identity;
-        // }
-    } 
-    
-    private void EndDrawing()
-    {
-        // var trail = currentDrawing.GetComponent<TrailRenderer>();
-        // currentDrawing.transform.parent = null;
-        // currentDrawing.GetComponent<TrailRenderer>().emitting = false;
-        // currentDrawing = null;
     }
 
     struct Message
@@ -90,14 +65,10 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         transform.position = data.position;
         transform.rotation = data.rotation;
 
-        if (data.isDrawing && !currentDrawing)
-        {
-            BeginDrawing();
-        }
-        if (!data.isDrawing && currentDrawing)
-        {
-            EndDrawing();
-        }
+        // Make sure the logic in FixedUpdate doesn't trigger as a result of this message
+        lastPosition = transform.position;
+        lastRotation = transform.rotation;
+
     }
     void Start()
     {
@@ -108,7 +79,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         drawingMaterial = new Material(shader);
         drawingMaterial.SetColor("_Color", Color.red); // sets colour, TODO: add to menu
         prevNibPos = new Vector3(0f, 0f, 0f);
-        icingSpheres = new List<GameObject>();
+        icingObjects = new List<GameObject>();
     }
 
     private void FixedUpdate()
@@ -116,6 +87,26 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         if (owner)
         {
             context.SendJson(new Message(transform, isDrawing:currentDrawing));
+
+            //send new position of icing brush to network
+            if(lastPosition != transform.position)
+            {
+                lastPosition = transform.position;
+                context.SendJson(new Message()
+                {
+                    position = transform.position
+                });
+            }
+
+            //send new rotation of icing brush to network
+            if(lastRotation != transform.rotation)
+            {
+                lastRotation = transform.rotation;
+                context.SendJson(new Message()
+                {
+                    rotation = transform.rotation
+                });
+            }
         }
 
         if (isUsing)
@@ -126,7 +117,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
                 {
                     // GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     //below line sets rotation of sphere to be the same as nibs
-                    GameObject sphere = Instantiate(starIcingTip, nib.transform.position, nib.transform.rotation); 
+                    NetworkSpawnManager.Find(this).SpawnWithPeerScope(icingTips[1]);
+                    GameObject sphere = Instantiate(icingTips[1], nib.transform.position, nib.transform.rotation); 
                     sphere.transform.Rotate(90, 0, 0);
                     sphere.name = "Icing";
                     sphere.tag = "Cake";
@@ -136,10 +128,12 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
                     // sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); //for circles
                     sphere.transform.localScale = new Vector3(10f, 10f, 10f); //for stars
                     prevNibPos = sphere.transform.position;
-                    icingSpheres.Add(sphere);
+                    icingObjects.Add(sphere);
                 }
             }
         }
+
+        
     }
 
     private void LateUpdate()
