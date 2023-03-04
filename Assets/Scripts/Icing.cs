@@ -25,7 +25,14 @@ public class Icing : MonoBehaviour
 
     private struct Message
     {
-        public Transform transform;
+        // public Transform transform;
+        public TransformMessage transform;
+
+        public Message(Transform transform)
+        {
+            // this.transform = transform;
+            this.transform = new TransformMessage(transform);
+        }
 
     }
 
@@ -35,7 +42,7 @@ public class Icing : MonoBehaviour
         var m = message.FromJson<Message>();
 
         // Use the message to update the Component
-        transform.localPosition = m.position;
-        transform.localRotation = m.rotation;
+        transform.localPosition = m.transform.position;
+        transform.localRotation = m.transform.rotation;
     }
 }

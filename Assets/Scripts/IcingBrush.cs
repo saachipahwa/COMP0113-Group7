@@ -118,7 +118,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
                     // GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     //below line sets rotation of sphere to be the same as nibs
                     GameObject sphere = NetworkSpawnManager.Find(this).SpawnWithPeerScope(icingTips[1]);
-                    var icingObject = go.GetComponent<Icing>();
+                    var icingObject = sphere.GetComponent<Icing>();
                     icingObject.owner = true;
                     // GameObject sphere = Instantiate(icingTips[1], nib.transform.position, nib.transform.rotation); 
                     sphere.transform.Rotate(90, 0, 0);
