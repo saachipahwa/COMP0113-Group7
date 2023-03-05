@@ -10,7 +10,7 @@ public class SpawningButtons : MonoBehaviour
 
     private Button currentButton; // The currently selected button
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         // Get a reference to the UbiqController component attached to the same GameObject as this script
@@ -26,7 +26,7 @@ public class SpawningButtons : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         // Use the Ubiq SDK to detect when the hand controller is hovering over a button
