@@ -5,15 +5,26 @@ using Ubiq.Spawning;
 using Ubiq.XR;
 using UnityEngine;
 
-public class ToppingTool : MonoBehaviour, IUseable, INetworkSpawnable, IGraspable
+public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
 {
-    private Hand attached;
+    Hand attached;
     private Rigidbody body;
     public NetworkId NetworkId { get; set; }
     public bool owner;
     private NetworkContext context;
     public GameObject topping;
 
+    public void Grasp(Hand controller)
+    {
+        owner = true;
+        attached = controller;
+    }
+
+    public void Release(Hand controller)
+    {
+        owner = false;
+        attached = null;
+    }
     private void Awake()
     {
         // body = GetComponent<Rigidbody>();
@@ -24,11 +35,11 @@ public class ToppingTool : MonoBehaviour, IUseable, INetworkSpawnable, IGraspabl
     {
         context = NetworkScene.Register(this);
     }
-    public void Attach(Hand hand)
-    {
-        attached = hand;
-        owner = true;
-    }
+    // public void Attach(Hand hand)
+    // {
+    //     attached = hand;
+    //     owner = true;
+    // }
     public void UnUse(Hand controller)
     {
     }
@@ -42,17 +53,6 @@ public class ToppingTool : MonoBehaviour, IUseable, INetworkSpawnable, IGraspabl
     // {
     //     NetworkSpawnManager.Find(this).SpawnWithRoomScope(topping);
     // }
-    public void Grasp(Hand controller)
-    {
-        attached = controller;
-        owner = true;
-    }
-
-    public void Release(Hand controller)
-    {
-        attached = null;
-        owner = false;
-    }
 
 
     public struct Message
@@ -61,7 +61,7 @@ public class ToppingTool : MonoBehaviour, IUseable, INetworkSpawnable, IGraspabl
 
         public Message(Transform transform)
         {
-            this.transform = new TransformMessage(transform);
+            this.transform = new TransformMessage(transform); 
         }
     }
 

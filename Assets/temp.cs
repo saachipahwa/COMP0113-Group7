@@ -12,13 +12,13 @@ public class temp : MonoBehaviour, IUseable
 
     public void Use(Hand controller)
     {
-        var go = NetworkSpawnManager.Find(this).SpawnWithPeerScope(prefabToSpawn);
-        var candle = prefabToSpawn.GetComponent<ToppingTool>();
-        candle.owner = true;
-        if (candle != null)
-        {
-            candle.Attach(hand);
-        }
+        // var go = NetworkSpawnManager.Find(this).SpawnWithPeerScope(prefabToSpawn);
+        // var candle = prefabToSpawn.GetComponent<ToppingTool>();
+        // candle.owner = true;
+        // if (candle != null)
+        // {
+        //     candle.Attach(hand);
+        // }
     }
     public void UnUse(Hand controller)
     {
