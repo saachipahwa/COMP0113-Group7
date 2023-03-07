@@ -22,7 +22,7 @@ public class Topping : MonoBehaviour, INetworkSpawnable
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!msgSent)
         {
@@ -33,8 +33,8 @@ public class Topping : MonoBehaviour, INetworkSpawnable
                     position = transform.localPosition,
                     rotation = transform.localRotation
                 });
+                msgSent = true;
             }
-            msgSent = true;
         }
     }
 
@@ -47,7 +47,7 @@ public class Topping : MonoBehaviour, INetworkSpawnable
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
     {
         var m = message.FromJson<Message>();
-
+        msgSent = true;
         transform.localPosition = m.position;
         transform.localRotation = m.rotation;
     }

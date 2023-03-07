@@ -60,7 +60,7 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         public string name;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (attached)
         {
