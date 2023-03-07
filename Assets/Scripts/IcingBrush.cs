@@ -22,6 +22,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     public NetworkId NetworkId { get; set; }
     private Vector3 lastPosition;
     private Quaternion lastRotation;
+    public int icingID;
+    public GameObject cake;
 
     public void Grasp(Hand controller)
     {
@@ -38,6 +40,26 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     public void Use(Hand controller) 
     {
         isUsing = true;
+        // if (isTouchingCake)
+        // {
+        //     // if (prevNibPos != nib.transform.position)
+        //     // {
+        //         //below line sets rotation of sphere to be the same as nibs
+        //     GameObject sphere = NetworkSpawnManager.Find(this).SpawnWithPeerScope(icingTips[icingID]);
+        //     sphere.transform.rotation = transform.rotation;
+        //     sphere.transform.Rotate(90, 0, 0);
+        //     // sphere.name = "Icing";
+        //     // sphere.tag = "Cake";
+        //     // MeshRenderer meshRenderer = sphere.GetComponent<MeshRenderer>();
+        //     // meshRenderer.material.color = Color.red;
+        //     sphere.transform.position = nib.transform.position;
+        //     sphere.transform.localScale = sphere.transform.localScale * 2f;
+        //     var icingObject = sphere.GetComponent<Icing>();
+        //     icingObject.owner = true;
+        //         // prevNibPos = sphere.transform.position;
+        //         // icingObjects.Add(sphere);
+        //     // }
+        // }
     }
 
     public void UnUse(Hand controller)
@@ -49,93 +71,76 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     {
         public Vector3 position;
         public Quaternion rotation;
-        public bool isDrawing;
-
-        public Message(Transform transform, bool isDrawing)
-        {
-            this.position = transform.position;
-            this.rotation = transform.rotation;
-            this.isDrawing = isDrawing;
-        }
+        public bool isIcing;
     }
 
     public void ProcessMessage (ReferenceCountedSceneGraphMessage msg)
     {
         var data = msg.FromJson<Message>();
-        transform.position = data.position;
-        transform.rotation = data.rotation;
+        transform.localPosition = data.position;
+        transform.localRotation = data.rotation;
+        // isUsing = data.isIcing;
 
         // Make sure the logic in FixedUpdate doesn't trigger as a result of this message
-        lastPosition = transform.position;
-        lastRotation = transform.rotation;
-
+        // lastPosition = transform.position;
+        // lastRotation = transform.rotation;
+    }
+    private void Awake()
+    {
+        owner = false;
     }
     void Start()
     {
         nib = transform.Find("PipingTip/Nib"); //just the transform
         nib_obj = GameObject.Find("Nib"); //the object itself
         context = NetworkScene.Register(this);
-        var shader = Shader.Find("Particles/Standard Surface");
-        drawingMaterial = new Material(shader);
-        drawingMaterial.SetColor("_Color", Color.red); // sets colour, TODO: add to menu
         prevNibPos = new Vector3(0f, 0f, 0f);
         icingObjects = new List<GameObject>();
+        // cake = GameObject.Find("Cake");
     }
 
     private void FixedUpdate()
     {
         if (owner)
         {
-            context.SendJson(new Message(transform, isDrawing:currentDrawing));
-
-            //send new position of icing brush to network
-            if(lastPosition != transform.position)
+            //send new position or rotation of icing brush to network
+            if(lastPosition != transform.position || lastRotation != transform.rotation)
             {
                 lastPosition = transform.position;
-                context.SendJson(new Message()
-                {
-                    position = transform.position
-                });
-            }
-
-            //send new rotation of icing brush to network
-            if(lastRotation != transform.rotation)
-            {
                 lastRotation = transform.rotation;
                 context.SendJson(new Message()
                 {
-                    rotation = transform.rotation
+                    position = transform.localPosition,
+                    rotation = transform.localRotation,
+                    // isIcing = isUsing
                 });
             }
         }
-
         if (isUsing)
         {
             if (isTouchingCake)
             {
                 if (prevNibPos != nib.transform.position)
                 {
-                    // GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     //below line sets rotation of sphere to be the same as nibs
-                    GameObject sphere = NetworkSpawnManager.Find(this).SpawnWithPeerScope(icingTips[1]);
+                    GameObject sphere = NetworkSpawnManager.Find(this).SpawnWithPeerScope(icingTips[icingID]);
+                    // GameObject sphere = Instantiate(icingTips[icingID], nib.transform.position, nib.transform.rotation);
                     var icingObject = sphere.GetComponent<Icing>();
-                    icingObject.owner = true;
-                    // GameObject sphere = Instantiate(icingTips[1], nib.transform.position, nib.transform.rotation); 
+                    // sphere.transform.rotation = transform.rotation;
                     sphere.transform.Rotate(90, 0, 0);
-                    sphere.name = "Icing";
-                    sphere.tag = "Cake";
-                    MeshRenderer meshRenderer = sphere.GetComponent<MeshRenderer>();
-                    meshRenderer.material.color = Color.red;
+                    // sphere.name = "Icing";
+                    // sphere.tag = "Cake";
+                    // MeshRenderer meshRenderer = sphere.GetComponent<MeshRenderer>();
+                    // meshRenderer.material.color = Color.red;
                     sphere.transform.position = nib.transform.position;
-                    // sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); //for circles
-                    sphere.transform.localScale = new Vector3(10f, 10f, 10f); //for stars
+                    sphere.transform.localScale = sphere.transform.localScale * 2f;
+                    // icingObject.owner = true;
+                    // sphere.transform.parent = cake.transform;
                     prevNibPos = sphere.transform.position;
                     icingObjects.Add(sphere);
                 }
             }
         }
-
-        
     }
 
     private void LateUpdate()

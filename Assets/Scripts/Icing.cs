@@ -7,8 +7,9 @@ using Ubiq.Messaging;
 public class Icing : MonoBehaviour
 {
     NetworkContext context;
+    public NetworkId NetworkId { get; set; }
     public bool owner;
-
+    private bool msgSent = false;
     
     // Start is called before the first frame update
     void Start()
@@ -18,31 +19,36 @@ public class Icing : MonoBehaviour
 
     void Update()
     {
-        if (owner){
-            context.SendJson(new Message(transform));
+        if (!msgSent)
+        {
+            if (owner)
+            {
+                context.SendJson(new Message()
+                {
+                    position = transform.localPosition,
+                    rotation = transform.localRotation,
+                    scale = transform.localScale
+                });
+                msgSent = true;
+            }
         }
     }
 
     private struct Message
     {
-        // public Transform transform;
-        public TransformMessage transform;
-
-        public Message(Transform transform)
-        {
-            // this.transform = transform;
-            this.transform = new TransformMessage(transform);
-        }
-
+        public Vector3 position;
+        public Quaternion rotation;
+        public Vector3 scale;
     }
 
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
     {
         // Parse the message
         var m = message.FromJson<Message>();
-
+        msgSent = true;
         // Use the message to update the Component
-        transform.position = m.transform.position;
-        transform.rotation = m.transform.rotation;
+        transform.localPosition = m.position;
+        transform.localRotation = m.rotation;
+        transform.localScale = m.scale;
     }
 }
