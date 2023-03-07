@@ -27,7 +27,6 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     }
     private void Awake()
     {
-        // body = GetComponent<Rigidbody>();
         owner = false;
     }
     
@@ -49,19 +48,16 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         GameObject spawnedTopping = NetworkSpawnManager.Find(this).SpawnWithPeerScope(topping);
         spawnedTopping.transform.position = transform.position;
         spawnedTopping.transform.rotation = transform.rotation;
-        // var topping_script = spawnedTopping.GetComponent<Topping>();
-        // topping_script.owner = true;
+        var topping_script = spawnedTopping.GetComponent<Topping>();
+        topping_script.owner = true;
     }
 
 
     public struct Message
     {
-        public TransformMessage transform;
-
-        public Message(Transform transform)
-        {
-            this.transform = new TransformMessage(transform); 
-        }
+        public Vector3 position;
+        public Quaternion rotation;
+        public string name;
     }
 
     void FixedUpdate()
@@ -74,15 +70,25 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 
         if(owner)
         {
-            context.SendJson(new Message(transform));
+            context.SendJson(new Message()
+            {
+                position = transform.localPosition,
+                rotation = transform.localRotation,
+                name = transform.name
+            });
         }
     }
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
+    {
+        var msg = message.FromJson<Message>();
+
+
+        if (msg.name == transform.name)
         {
-            var msg = message.FromJson<Message>();
-            transform.localPosition = msg.transform.position;
-            transform.localRotation = msg.transform.rotation;
+            transform.localPosition = msg.position;
+            transform.localRotation = msg.rotation;
         }
+    }
 
 }
 

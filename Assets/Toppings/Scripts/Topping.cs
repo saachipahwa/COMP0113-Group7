@@ -13,7 +13,8 @@ public class Topping : MonoBehaviour, INetworkSpawnable
     public Quaternion lastRotation;
     public NetworkId NetworkId { get; set; }
     private Rigidbody rigidBody;
-    // public bool owner;
+    public bool owner = false;
+    private bool msgSent = false;
 
     void Start()
     {
@@ -23,34 +24,22 @@ public class Topping : MonoBehaviour, INetworkSpawnable
 
     void FixedUpdate()
     {
-        if (lastPlacement == null) 
+        if (!msgSent)
         {
-            lastPosition = transform.localPosition;
-            lastRotation = transform.localRotation;
-            context.SendJson(new Message()
+            if (owner)
             {
-                position = transform.localPosition,
-                rotation = transform.localRotation
-            });
-        }
-        else if (lastPlacement.position != transform.localPosition)
-        {
-            if (lastPlacement.rotation != transform.localRotation)
-            {
-                lastPosition = transform.localPosition;
-                lastRotation = transform.localRotation;
                 context.SendJson(new Message()
                 {
                     position = transform.localPosition,
                     rotation = transform.localRotation
                 });
             }
+            msgSent = true;
         }
     }
 
     public struct Message
     {
-        // public Transform msgTransform;
         public Vector3 position;
         public Quaternion rotation;
     }
@@ -61,9 +50,6 @@ public class Topping : MonoBehaviour, INetworkSpawnable
 
         transform.localPosition = m.position;
         transform.localRotation = m.rotation;
-
-        lastPosition = transform.localPosition;
-        lastRotation = transform.localRotation;
     }
 
     private void OnTriggerEnter(Collider other)
