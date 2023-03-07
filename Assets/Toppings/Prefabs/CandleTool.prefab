@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4600245012727068435}
   - component: {fileID: 1743927965429466073}
   - component: {fileID: 8477394526272117815}
+  - component: {fileID: 238457243428405738}
   m_Layer: 0
   m_Name: CandleTool
   m_TagString: Untagged
@@ -100,3 +101,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: 0
   topping: {fileID: 7806189075428854260, guid: 7d8407ceeb0199545ba9ec506d6698b4, type: 3}
+--- !u!136 &238457243428405738
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230617403990778380}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0077815796
+  m_Height: 0.122363426
+  m_Direction: 1
+  m_Center: {x: 0.0004794062, y: 0.013681676, z: 0}

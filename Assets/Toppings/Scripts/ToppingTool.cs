@@ -46,13 +46,12 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 
     public void Use(Hand controller)
     {
-        // placeTopping();
+        GameObject spawnedTopping = NetworkSpawnManager.Find(this).SpawnWithPeerScope(topping);
+        spawnedTopping.transform.position = transform.position;
+        spawnedTopping.transform.rotation = transform.rotation;
+        // var topping_script = spawnedTopping.GetComponent<Topping>();
+        // topping_script.owner = true;
     }
-
-    // private void placeTopping()
-    // {
-    //     NetworkSpawnManager.Find(this).SpawnWithRoomScope(topping);
-    // }
 
 
     public struct Message
@@ -65,7 +64,7 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (attached)
         {
