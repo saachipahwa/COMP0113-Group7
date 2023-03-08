@@ -126,7 +126,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
                     GameObject sphere = NetworkSpawnManager.Find(this).SpawnWithPeerScope(icingTips[icingID]);
                     // GameObject sphere = Instantiate(icingTips[icingID], nib.transform.position, nib.transform.rotation);
                     var icingObject = sphere.GetComponent<Icing>();
-                    // sphere.transform.rotation = transform.rotation;
+                    sphere.transform.rotation = transform.rotation;
                     sphere.transform.Rotate(90, 0, 0);
                     // sphere.name = "Icing";
                     // sphere.tag = "Cake";
