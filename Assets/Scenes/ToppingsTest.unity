@@ -258,7 +258,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361062847}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10.2, y: 0, z: 10.2}
@@ -1242,6 +1242,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4188573085650488436, guid: e3018fa04bc640d43a99136ae36ca07e, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 4188573085650488438, guid: e3018fa04bc640d43a99136ae36ca07e, type: 3}
       propertyPath: m_Enabled
       value: 1

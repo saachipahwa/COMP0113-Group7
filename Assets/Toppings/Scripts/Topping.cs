@@ -59,5 +59,9 @@ public class Topping : MonoBehaviour//, INetworkSpawnable
         {
             rigidBody.isKinematic = true;
         }
+        if (other.gameObject.tag == "Floor")
+        {
+            Destroy(gameObject, 5); // destroy gameobject after 5s of touching floor
+        }
     }
 }
