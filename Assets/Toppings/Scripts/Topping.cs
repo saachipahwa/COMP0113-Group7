@@ -30,8 +30,8 @@ public class Topping : MonoBehaviour, INetworkSpawnable
             {
                 context.SendJson(new Message()
                 {
-                    position = transform.localPosition,
-                    rotation = transform.localRotation
+                    position = transform.position,
+                    rotation = transform.rotation
                 });
                 msgSent = true;
             }
@@ -48,8 +48,8 @@ public class Topping : MonoBehaviour, INetworkSpawnable
     {
         var m = message.FromJson<Message>();
         msgSent = true;
-        transform.localPosition = m.position;
-        transform.localRotation = m.rotation;
+        transform.position = m.position;
+        transform.rotation = m.rotation;
     }
 
     private void OnTriggerEnter(Collider other)
