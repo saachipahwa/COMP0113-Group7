@@ -91,11 +91,10 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
     {
         var msg = message.FromJson<Message>();
-        isPlacing = msg.placing;
 
         if (msg.name == transform.name)
         {
-            if (isPlacing)
+            if (msg.placing)
             {
                 placeTopping(msg.position, msg.rotation);
             }
@@ -103,6 +102,5 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
             transform.rotation = msg.rotation;
         }
     }
-
 }
 
