@@ -18,7 +18,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     private GameObject nib_obj;
     private bool owner;
     private bool isTouchingCake = false;
-    private bool isUsing;
+    private bool isUsing = false;
     private Vector3 prevNibPos;
     private Vector3 lastPosition;
     private Quaternion lastRotation;
@@ -71,8 +71,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     public void ProcessMessage (ReferenceCountedSceneGraphMessage message)
     {
         var msg = message.FromJson<Message>();
-        isUsing = msg.isIcing;
-        if (isUsing)
+        if (msg.isIcing)
         {
             placeIcing(msg.nib_pos, msg.nib_rot);
         }
@@ -84,7 +83,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     {
         GameObject sphere = Instantiate(icingTips[icingID], nib_pos, nib_rot);
         sphere.transform.rotation = transform.rotation;
-        sphere.transform.Rotate(90, 0, 0);
+        // sphere.transform.Rotate(90, 0, 0);
         sphere.name = "Icing";
         sphere.tag = "Cake";
         MeshRenderer meshRenderer = sphere.GetComponent<MeshRenderer>();
