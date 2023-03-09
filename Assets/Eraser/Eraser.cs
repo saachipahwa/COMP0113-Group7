@@ -69,7 +69,10 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     void OnCollisionEnter(Collision collision)
     {
         ContactPoint contact = collision.contacts[0];
-        Destroy(collision.gameObject);
+        if(collision.gameObject.tag == "Topping"){
+            Destroy(collision.gameObject);
+        }
+       
     }
 
     // Update is called once per frame
