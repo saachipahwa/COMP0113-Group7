@@ -46,7 +46,6 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 
     public void Use(Hand controller)
     {
-        // GameObject spawnedTopping = NetworkSpawnManager.Find(this).SpawnWithPeerScope(topping);
         isPlacing = true;
     }
 
@@ -54,10 +53,6 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     {
         GameObject spawnedTopping = Instantiate(topping, pos, rot);
         isPlacing = false;
-        // spawnedTopping.transform.position = transform.position;
-        // spawnedTopping.transform.rotation = transform.rotation;
-        // var topping_script = spawnedTopping.GetComponent<Topping>();
-        // topping_script.owner = true;
     }
 
 
