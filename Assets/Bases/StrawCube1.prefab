@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 360766359454317405}
   - component: {fileID: 4065537904150552644}
   - component: {fileID: 997040306655741332}
-  - component: {fileID: 4427431423305852678}
   m_Layer: 0
   m_Name: StrawCube1
   m_TagString: Untagged
@@ -98,16 +97,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4427431423305852678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7193936206146331959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b54ef036aca45114fa1b238c54e0ad9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
