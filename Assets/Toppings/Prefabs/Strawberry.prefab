@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3831558533598242466}
   m_Layer: 0
   m_Name: Strawberry
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
-  owner: 0
 --- !u!135 &-3765830970867414127
 SphereCollider:
   m_ObjectHideFlags: 0

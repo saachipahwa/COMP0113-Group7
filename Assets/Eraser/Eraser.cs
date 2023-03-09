@@ -4,13 +4,14 @@ using UnityEngine;
 using Ubiq.XR;
 using Ubiq.Messaging;
 
-public class Eraser : MonoBehaviour, IGraspable
+public class Eraser : MonoBehaviour, IGraspable, IUseable
 {   
     Hand grasped;
     NetworkContext context;
     Vector3 lastPosition;
     
     private bool owner; 
+    private bool isUsing = false;
     private Rigidbody rigidBody;
 
     public void Grasp(Hand controller)
@@ -25,6 +26,16 @@ public class Eraser : MonoBehaviour, IGraspable
         grasped = null;
     }
 
+    public void Use(Hand controller) 
+    {
+        isUsing = true;
+    }
+
+    public void UnUse(Hand controller)
+    {
+        isUsing = false;
+    }
+
     private void Awake()
     {
         owner = false;
@@ -35,7 +46,6 @@ public class Eraser : MonoBehaviour, IGraspable
     {
         context = NetworkScene.Register(this);
         rigidBody = GetComponent<Rigidbody>();
-
     }
 
     private struct Message
