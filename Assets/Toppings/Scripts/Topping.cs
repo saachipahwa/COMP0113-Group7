@@ -15,7 +15,6 @@ public class Topping : MonoBehaviour
 
     void Start()
     {
-        Debug.Log($"{transform.position} | {transform.rotation}");
         rigidBody = GetComponent<Rigidbody>();
     }
 

@@ -51,7 +51,6 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 
     public void placeTopping(Vector3 pos, Quaternion rot)
     {
-        Debug.Log($"{pos} | {rot}");
         GameObject spawnedTopping = Instantiate(topping, pos, rot);
         isPlacing = false;
     }
