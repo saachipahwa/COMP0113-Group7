@@ -69,7 +69,7 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Topping"){
+        if(other.gameObject.tag == "Topping"||other.gameObject.tag == "Icing"){
             Destroy(other.gameObject);
         }
     }
