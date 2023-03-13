@@ -74,18 +74,22 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
         public Quaternion rotation;
         public Vector3 nib_pos;
         public Quaternion nib_rot;
+        public string name;
         public bool isIcing;
     }
 
     public void ProcessMessage (ReferenceCountedSceneGraphMessage message)
     {
         var msg = message.FromJson<Message>();
-        if (msg.isIcing)
+        if (msg.name == transform.name)
         {
-            placeIcing(msg.nib_pos, msg.nib_rot);
+            if (msg.isIcing)
+            {
+                placeIcing(msg.nib_pos, msg.nib_rot);
+            }
+            transform.position = msg.position;
+            transform.rotation = msg.rotation;
         }
-        transform.position = msg.position;
-        transform.rotation = msg.rotation;
     }
 
     private void placeIcing(Vector3 nib_pos, Quaternion nib_rot) // potential TODO: add colour as a parameter (will need to add colours into message and processmessage)
@@ -124,7 +128,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
                     rotation = transform.localRotation,
                     isIcing = isUsing,
                     nib_pos = nib.transform.position,
-                    nib_rot = nib.transform.rotation
+                    nib_rot = nib.transform.rotation,
+                    name = transform.name
                 });
             }
         }
