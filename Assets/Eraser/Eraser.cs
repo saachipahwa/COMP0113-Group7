@@ -76,7 +76,6 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
         // {
             if(other.gameObject.tag == "Topping"|| other.gameObject.tag == "Icing")
             {
-                Debug.Log("Haiiii");
                 Destroy(other.gameObject);
             }
         // } 
