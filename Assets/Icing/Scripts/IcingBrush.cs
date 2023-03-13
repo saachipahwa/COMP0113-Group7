@@ -51,8 +51,17 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     }
     void Start()
     {
-        nib = transform.Find("PipingTip/Nib"); //just the transform
-        nib_obj = GameObject.Find("Nib"); //the object itself
+        Transform[] allChildTransforms = GetComponentsInChildren<Transform>(includeInactive: false);
+        foreach (Transform child in allChildTransforms)
+        {
+            if (child.name == "Nib")
+            {
+                nib = child;
+                break;
+            }
+        }
+
+        nib_obj = nib.gameObject;
         context = NetworkScene.Register(this);
         prevNibPos = new Vector3(0f, 0f, 0f);
         icingObjects = new List<GameObject>();
