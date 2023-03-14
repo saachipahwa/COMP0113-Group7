@@ -99,7 +99,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
         sphere.transform.rotation = transform.rotation;
         // sphere.transform.Rotate(90, 0, 0);
         sphere.name = "Icing";
-        sphere.tag = "Cake";
+        sphere.tag = "Icing";
         MeshRenderer meshRenderer = sphere.GetComponent<MeshRenderer>();
         if (colour != null)
         {
