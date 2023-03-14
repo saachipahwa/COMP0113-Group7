@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7213681624404760798}
   - component: {fileID: 7213681624404760769}
   - component: {fileID: 7213681624404760768}
-  - component: {fileID: 9134664315333384945}
+  - component: {fileID: 3464747691048216077}
   m_Layer: 0
   m_Name: PlainCube1
   m_TagString: Untagged
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9134664315333384945
+--- !u!114 &3464747691048216077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,13 +107,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7213681624404760773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2abaeef002913f4bba8dceec5907b47, type: 3}
+  m_Script: {fileID: 11500000, guid: a82ea0746a46941c78603d03e7ac3ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   materials:
-  - {fileID: 2100000, guid: 46279d5e73beb174b9fbb21ab2492a8e, type: 2}
-  - {fileID: 2100000, guid: 214c1eec06198524db48017885512f2d, type: 2}
-  - {fileID: 2100000, guid: f9b7033ae9f9b2348a4c01f7df7c7382, type: 2}
+  - {fileID: 2100000, guid: 507a040c2296d471283166a92ded480e, type: 2}
+  - {fileID: 2100000, guid: 3dcafe5d691bfcc48b4285f0c0151937, type: 2}
+  - {fileID: 2100000, guid: 6bf299729fba262469c511707829308c, type: 2}
   layers:
   - {fileID: 7213681624404760773}
   materialIndex: 0
