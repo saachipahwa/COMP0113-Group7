@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 192433583787913332}
   - component: {fileID: 192433583787913335}
   m_Layer: 0
-  m_Name: Icing
+  m_Name: Icing_star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -470,8 +470,8 @@ MonoBehaviour:
   icingTips:
   - {fileID: 628827273442983104, guid: 8b7b1cc01d98749afa128febab81a3e6, type: 3}
   - {fileID: 993926549233606890, guid: 2c95950270fcf6f4fa34162ad2d1a4cf, type: 3}
-  icingID: 0
-  cake: {fileID: 0}
+  icingID: 1
+  colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &192433584255065682
 GameObject:
   m_ObjectHideFlags: 0
