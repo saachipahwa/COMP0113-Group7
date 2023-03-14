@@ -82,18 +82,25 @@ public class SpawnPrefabButton : MonoBehaviour
         GameObject spawnedObject = Instantiate(prefabToSpawn[prefabID], spawnPosition, spawnRotation);
         spawnedObject.name = $"{objectLabel}_{spawnedObject.name}";
         objectLabel++;
+        
+        switch(prefabID)
+        {
+            case 0: // icing
+            case 1: 
+                var icing_script = spawnedObject.GetComponent<IcingBrush>();
+                icing_script.icingID = prefabID;
+                icing_script.owner = owner;
+                break;
+            case 5: // eraser
+                var eraser_script = spawnedObject.GetComponent<Eraser>();
+                eraser_script.owner = owner;
+                break;
+            default: // toppings
+                var topping_script = spawnedObject.GetComponent<ToppingTool>();
+                topping_script.owner = owner;
+                break;
+        }
 
-        if (prefabID == 0 || prefabID == 1)
-        {
-            var icing_script = spawnedObject.GetComponent<IcingBrush>();
-            icing_script.icingID = prefabID;
-            icing_script.owner = owner;
-        }
-        else
-        {
-            var topping_script = spawnedObject.GetComponent<ToppingTool>();
-            topping_script.owner = owner;
-        }
         if (owner)
         {
             currentPlayerTool = spawnedObject;

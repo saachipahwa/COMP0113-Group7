@@ -10,19 +10,26 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     NetworkContext context;
     private Vector3 lastPosition;
     private Quaternion lastRotation;
-    private bool owner; 
+    public bool owner; 
     private bool isUsing = false;
     private Rigidbody rigidBody;
 
     public void Grasp(Hand controller)
     {
-        owner = true;
-        grasped = controller;
+        // owner = true;
+        if (owner == true)
+        {
+            grasped = controller;
+        }
+        else
+        {
+            Release(controller);
+        }
     }
 
     public void Release(Hand controller)
     {
-        owner = false;
+        // owner = false;
         grasped = null;
     }
 
@@ -38,7 +45,7 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
 
     private void Awake()
     {
-        owner = false;
+        // owner = false;
     }
 
     // Start is called before the first frame update
