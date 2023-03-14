@@ -17,18 +17,26 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 
     public void Grasp(Hand controller)
     {
-        owner = true;
-        attached = controller;
+        // owner = true;
+        // attached = controller;
+        if (owner == true)
+        {
+            attached = controller;
+        }
+        else
+        {
+            Release(controller);
+        }
     }
 
     public void Release(Hand controller)
     {
-        owner = false;
+        // owner = false;
         attached = null;
     }
     private void Awake()
     {
-        owner = false;
+        // owner = false;
     }
     
     void Start()

@@ -5,18 +5,18 @@ using Ubiq.XR;
 using Ubiq.Messaging;
 using Ubiq.Spawning;
 
-public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
+public class IcingBrush : MonoBehaviour, IGraspable, IUseable
 {
     Hand grasped;
     NetworkContext context;
-    public NetworkId NetworkId { get; set; }
+    // public NetworkId NetworkId { get; set; }
     public GameObject[] icingTips; //[sphere, star]
     public int icingID;
     public Color colour;
     private GameObject cake;
     private Transform nib;
     private GameObject nib_obj;
-    private bool owner;
+    public bool owner;
     private bool isTouchingCake = false;
     private bool isUsing = false;
     private Vector3 prevNibPos;
@@ -33,13 +33,20 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     // }
     public void Grasp(Hand controller)
     {
-        owner = true;
-        grasped = controller;
+        if (owner == true)
+        {
+            grasped = controller;
+        }
+        else
+        {
+            Release(controller);
+        }
+        // owner = true;
     }
 
     public void Release(Hand controller)
     {
-        owner = false;
+        // owner = false;
         grasped = null;
     }
 
@@ -54,7 +61,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     }
     private void Awake()
     {
-        owner = false;
+        // owner = false;
     }
     void Start()
     {
