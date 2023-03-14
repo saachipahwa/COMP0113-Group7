@@ -7,6 +7,9 @@ TagManager:
   - Teleport
   - Cake
   - Floor
+  - Topping
+  - Icing
+  - Tool
   layers:
   - Default
   - TransparentFX

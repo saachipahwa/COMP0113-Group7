@@ -1,0 +1,33 @@
+.buttons-main-title {
+    -unity-font-style: bold;
+    font-size: 32px;
+    background-color: rgba(202, 192, 192, 255);
+    border-left-color: rgba(87, 44, 44, 255);
+    border-right-color: rgba(87, 44, 44, 255);
+    border-top-color: rgba(87, 44, 44, 255);
+    border-bottom-color: rgba(87, 44, 44, 255);
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    border-top-left-radius: 14px;
+    border-bottom-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 27px;
+    padding-right: 27px;
+    padding-top: 27px;
+    padding-bottom: 27px;
+}
+
+.buttons-main-title:hover {
+    background-color: rgba(132, 49, 49, 255);
+}
+
+.buttons-main-title:active {
+    background-color: rgba(149, 113, 113, 255);
+}
