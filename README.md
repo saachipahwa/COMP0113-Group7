@@ -2,6 +2,7 @@
 VR Cake decorating game in Unity
 
 ## Assets Used
+* [Cooking Assets](https://milkandbanana.itch.io/cooking-assets)
 * Wooden Floor Materials via [Unity Asset Store](https://assetstore.unity.com/packages/2d/textures-materials/wood/wooden-floor-materials-150564)
 * Simple Door by Wesley Thompson [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/2WB4R5KvYwf)
 * Light Ceiling Single by Quaternius via [Poly Pizza](https://poly.pizza/m/JT44JUXU2d)
