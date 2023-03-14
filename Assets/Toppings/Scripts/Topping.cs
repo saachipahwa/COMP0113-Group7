@@ -20,6 +20,7 @@ public class Topping : MonoBehaviour
 
     void Update()
     {
+
     }
 
     private void OnTriggerEnter(Collider other)

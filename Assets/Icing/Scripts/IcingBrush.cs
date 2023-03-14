@@ -24,7 +24,6 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     private Quaternion lastRotation;
     private List<GameObject> icingObjects;
 
-
     public void Grasp(Hand controller)
     {
         owner = true;
@@ -99,7 +98,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
         sphere.transform.rotation = transform.rotation;
         // sphere.transform.Rotate(90, 0, 0);
         sphere.name = "Icing";
-        sphere.tag = "Icing";
+        sphere.tag = "Cake";
         MeshRenderer meshRenderer = sphere.GetComponent<MeshRenderer>();
         if (colour != null)
         {
