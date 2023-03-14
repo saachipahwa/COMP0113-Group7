@@ -24200,7 +24200,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8202566057419702405, guid: 566fddc1db81a414b84013ac139d8e84, type: 3}
       propertyPath: m_Name
-      value: PlainCylinder2
+      value: Cake
       objectReference: {fileID: 0}
     - target: {fileID: 8564880181734735617, guid: 566fddc1db81a414b84013ac139d8e84, type: 3}
       propertyPath: m_RootOrder

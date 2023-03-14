@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5372377449956592300}
   m_Layer: 0
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: Cake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477861162657811272}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 5727281570995770793}
   m_Layer: 0
   m_Name: Bottom
-  m_TagString: Untagged
+  m_TagString: Cake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,7 +189,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2518047857456080887}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 5781216826823819513}
   m_Layer: 0
   m_Name: PlainCube2
-  m_TagString: Untagged
+  m_TagString: Cake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 507a040c2296d471283166a92ded480e, type: 2}
   - {fileID: 2100000, guid: 3dcafe5d691bfcc48b4285f0c0151937, type: 2}
   - {fileID: 2100000, guid: 6bf299729fba262469c511707829308c, type: 2}
-
+  - {fileID: 0}
   layers:
   - {fileID: 477861162657811272}
   - {fileID: 2518047857456080887}
