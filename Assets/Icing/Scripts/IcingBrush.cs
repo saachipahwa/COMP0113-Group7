@@ -24,11 +24,6 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     private Quaternion lastRotation;
     private List<GameObject> icingObjects;
 
-    public void setID(int value)
-    {
-        icingID = value;
-    }
-
     public void Grasp(Hand controller)
     {
         owner = true;

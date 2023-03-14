@@ -9,6 +9,7 @@ using Ubiq.Samples;
 public class SpawnPrefabButton : MonoBehaviour
 {
     public GameObject prefabToSpawn;
+    public int icingID = -1;
 
     public void SpawnPrefab()
     {
@@ -16,6 +17,12 @@ public class SpawnPrefabButton : MonoBehaviour
         Quaternion spawnRotation = transform.rotation;
 
         GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, spawnRotation);
+        if (icingID != -1)
+        {
+            spawnedObject.GetComponent<IcingBrush>().icingID = icingID;
+        }
+
+        // TODO: if hand is not null, destroy object in hand, then .attach()
     }
 }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276807, g: 0.21589197, b: 0.29782572, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13510,7 +13510,7 @@ GameObject:
   - component: {fileID: 332455307}
   - component: {fileID: 332455306}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Flower_Candle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13549,7 +13549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2391c6832a551346b743d33a6230c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabToSpawn: {fileID: 390472379354730052, guid: eb2f0f57d615a194e8a4d47f241d7ca0, type: 3}
+  prefabToSpawn: {fileID: 6173841792260990541, guid: f92e953ccb0902444b5c28776652ce05, type: 3}
+  icingID: -1
 --- !u!114 &332455307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23057,7 +23058,7 @@ GameObject:
   - component: {fileID: 638872336}
   - component: {fileID: 638872335}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Icing_Sphere_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23096,7 +23097,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2391c6832a551346b743d33a6230c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabToSpawn: {fileID: 192433583787913334, guid: 36998be13102bb94d9690f8b54c74cb4, type: 3}
+  prefabToSpawn: {fileID: 5325789783269645340, guid: c81226f43588a9a4cb7702f3f6e50138, type: 3}
+  icingID: 0
 --- !u!114 &638872336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24691,7 +24693,7 @@ GameObject:
   - component: {fileID: 698192273}
   - component: {fileID: 698192272}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Candle_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24730,7 +24732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2391c6832a551346b743d33a6230c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabToSpawn: {fileID: 6768930317196884147, guid: ed9df34983d77f042889b3ae13f3c258, type: 3}
+  prefabToSpawn: {fileID: 230617403990778380, guid: 0ec6cf7236fe58347a10d38855134632, type: 3}
+  icingID: -1
 --- !u!114 &698192273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34189,7 +34192,7 @@ GameObject:
   - component: {fileID: 1078032522}
   - component: {fileID: 1078032521}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Icing_Star_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34228,7 +34231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2391c6832a551346b743d33a6230c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabToSpawn: {fileID: 192433583787913334, guid: 5d2c209205375aa4b9993912b183599e, type: 3}
+  prefabToSpawn: {fileID: 5325789783269645340, guid: c81226f43588a9a4cb7702f3f6e50138, type: 3}
+  icingID: 1
 --- !u!114 &1078032522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36643,6 +36647,10 @@ PrefabInstance:
     - target: {fileID: 1206544753365771222, guid: 33cb6d2a29abed346b39b957a9e24d34, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1206544753847649310, guid: 33cb6d2a29abed346b39b957a9e24d34, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1206544754330353990, guid: 33cb6d2a29abed346b39b957a9e24d34, type: 3}
       propertyPath: near clip plane
@@ -44257,7 +44265,7 @@ GameObject:
   - component: {fileID: 1474057798}
   - component: {fileID: 1474057797}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Strawberry_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44296,7 +44304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2391c6832a551346b743d33a6230c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabToSpawn: {fileID: 5857763874546506262, guid: 35f6c72f2f8c8f34a85a03f47bcca2a7, type: 3}
+  prefabToSpawn: {fileID: 3379555315528415768, guid: 08157d12807bd3e4f857347d53c1f5b5, type: 3}
+  icingID: -1
 --- !u!114 &1474057798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51280,6 +51289,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4188573085650488436, guid: e3018fa04bc640d43a99136ae36ca07e, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 4188573087108496552, guid: e3018fa04bc640d43a99136ae36ca07e, type: 3}
       propertyPath: m_Name
       value: Environment
