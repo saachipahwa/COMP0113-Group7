@@ -13,6 +13,7 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     public bool owner;
     private NetworkContext context;
     public GameObject topping;
+    private bool isPlacing = false;
 
     public void Grasp(Hand controller)
     {
@@ -45,11 +46,13 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 
     public void Use(Hand controller)
     {
-        GameObject spawnedTopping = NetworkSpawnManager.Find(this).SpawnWithPeerScope(topping);
-        spawnedTopping.transform.position = transform.position;
-        spawnedTopping.transform.rotation = transform.rotation;
-        var topping_script = spawnedTopping.GetComponent<Topping>();
-        topping_script.owner = true;
+        isPlacing = true;
+    }
+
+    public void placeTopping(Vector3 pos, Quaternion rot)
+    {
+        GameObject spawnedTopping = Instantiate(topping, pos, rot);
+        isPlacing = false;
     }
 
 
@@ -58,6 +61,7 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         public Vector3 position;
         public Quaternion rotation;
         public string name;
+        public bool placing;
     }
 
     void Update()
@@ -68,27 +72,35 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
             transform.rotation = attached.transform.rotation;
         }
 
-        if(owner)
+        if (owner)
         {
             context.SendJson(new Message()
             {
-                position = transform.localPosition,
-                rotation = transform.localRotation,
-                name = transform.name
+                position = transform.position,
+                rotation = transform.rotation,
+                name = transform.name,
+                placing = isPlacing
             });
+        }
+
+        if (isPlacing)
+        {
+            placeTopping(transform.position, transform.rotation);
         }
     }
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
     {
         var msg = message.FromJson<Message>();
 
-
         if (msg.name == transform.name)
         {
-            transform.localPosition = msg.position;
-            transform.localRotation = msg.rotation;
+            if (msg.placing)
+            {
+                placeTopping(msg.position, msg.rotation);
+            }
+            transform.position = msg.position;
+            transform.rotation = msg.rotation;
         }
     }
-
 }
 
