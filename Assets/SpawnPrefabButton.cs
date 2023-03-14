@@ -8,18 +8,44 @@ using Ubiq.Samples;
 
 public class SpawnPrefabButton : MonoBehaviour
 {
-    public GameObject prefabToSpawn;
-    public int icingID = -1;
-
-    public void SpawnPrefab()
+    public GameObject[] prefabToSpawn;
+    private GameObject player;
+    
+    /*
+    0: icing (sphere)
+    1: icing (star)
+    2: candle
+    3: flower
+    4: strawberry
+    5: eraser
+    */
+    private Hand hand;
+    private GameObject spawnedObject = null;
+    void Start()
     {
-        Vector3 spawnPosition = transform.position;
-        Quaternion spawnRotation = transform.rotation;
+        player = GameObject.Find("Player");
+    }
+    public void SpawnPrefab(int prefabID)
+    {
+        // set the spawn position to be in front of the player
+        Vector3 spawnPosition = player.transform.position;
+        Vector3 playerDirection = player.transform.forward;
+        spawnPosition += playerDirection;
+        spawnPosition.y += 0.8f;
+        Quaternion spawnRotation = player.transform.rotation;
 
-        GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, spawnRotation);
-        if (icingID != -1)
+        // destroy the existing tool if player has one
+        if (spawnedObject != null)
         {
-            spawnedObject.GetComponent<IcingBrush>().icingID = icingID;
+            Destroy(spawnedObject);
+        }
+
+        // slightly hacky way to spawn the correct icing shape
+        spawnedObject = Instantiate(prefabToSpawn[prefabID], spawnPosition, spawnRotation);
+        if (prefabID == 0 || prefabID == 1)
+        {
+            var icing_script = spawnedObject.GetComponent<IcingBrush>();
+            icing_script.icingID = prefabID;
         }
 
         // TODO: if hand is not null, destroy object in hand, then .attach()

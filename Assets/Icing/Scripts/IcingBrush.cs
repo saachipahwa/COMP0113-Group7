@@ -24,6 +24,13 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     private Quaternion lastRotation;
     private List<GameObject> icingObjects;
 
+    // public void Attach(Hand controller)
+    // {
+    //     Debug.Log($"called: {controller}");
+    //     grasped = controller;
+    //     Debug.Log(grasped);
+    //     owner = true;
+    // }
     public void Grasp(Hand controller)
     {
         owner = true;
