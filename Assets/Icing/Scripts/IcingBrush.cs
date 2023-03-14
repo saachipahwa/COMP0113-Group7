@@ -24,7 +24,6 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     private Quaternion lastRotation;
     private List<GameObject> icingObjects;
 
-
     public void Grasp(Hand controller)
     {
         owner = true;
@@ -52,17 +51,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     }
     void Start()
     {
-        Transform[] allChildTransforms = GetComponentsInChildren<Transform>(includeInactive: false);
-        foreach (Transform child in allChildTransforms)
-        {
-            if (child.name == "Nib")
-            {
-                nib = child;
-                break;
-            }
-        }
-
-        nib_obj = nib.gameObject;
+        nib = transform.Find("PipingTip/Nib"); //just the transform
+        nib_obj = GameObject.Find("Nib"); //the object itself
         context = NetworkScene.Register(this);
         prevNibPos = new Vector3(0f, 0f, 0f);
         icingObjects = new List<GameObject>();
@@ -75,22 +65,18 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
         public Quaternion rotation;
         public Vector3 nib_pos;
         public Quaternion nib_rot;
-        public string name;
         public bool isIcing;
     }
 
     public void ProcessMessage (ReferenceCountedSceneGraphMessage message)
     {
         var msg = message.FromJson<Message>();
-        if (msg.name == transform.name)
+        if (msg.isIcing)
         {
-            if (msg.isIcing)
-            {
-                placeIcing(msg.nib_pos, msg.nib_rot);
-            }
-            transform.position = msg.position;
-            transform.rotation = msg.rotation;
+            placeIcing(msg.nib_pos, msg.nib_rot);
         }
+        transform.position = msg.position;
+        transform.rotation = msg.rotation;
     }
 
     private void placeIcing(Vector3 nib_pos, Quaternion nib_rot) // potential TODO: add colour as a parameter (will need to add colours into message and processmessage)
@@ -129,8 +115,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
                     rotation = transform.localRotation,
                     isIcing = isUsing,
                     nib_pos = nib.transform.position,
-                    nib_rot = nib.transform.rotation,
-                    name = transform.name
+                    nib_rot = nib.transform.rotation
                 });
             }
         }
