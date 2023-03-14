@@ -23,7 +23,9 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
     private Vector3 lastPosition;
     private Quaternion lastRotation;
     public int icingID;
+    
     public GameObject cake;
+
 
     public void Grasp(Hand controller)
     {
