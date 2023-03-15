@@ -8203,7 +8203,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1476569651}
         m_TargetAssemblyTypeName: CakeBase, Assembly-CSharp
-        m_MethodName: changeMaterial
+        m_MethodName: changeMaterial_send_msg
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21086,7 +21086,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1476569651}
         m_TargetAssemblyTypeName: CakeBase, Assembly-CSharp
-        m_MethodName: changeMaterial
+        m_MethodName: changeMaterial_send_msg
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -62307,7 +62307,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1476569651}
         m_TargetAssemblyTypeName: CakeBase, Assembly-CSharp
-        m_MethodName: changeMaterial
+        m_MethodName: changeMaterial_send_msg
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
