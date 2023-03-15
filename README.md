@@ -19,3 +19,4 @@ VR Cake decorating game in Unity
 * Birthday candles by Poly by Google [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/12v6b2zWmSG)
 * Flower by Hannah Boyd [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/7ebMaET5KBR)
 * Strawberries by Jarlan Perez [CC-BY](https://creativecommons.org/licenses/by/3.0/) via [Poly Pizza](https://poly.pizza/m/5n1vYWflaFt)
+* Flexible Color Picker by [Ward Dehairs](https://assetstore.unity.com/publishers/32897) via [Unity Asset Store](https://assetstore.unity.com/packages/tools/gui/flexible-color-picker-150497)
