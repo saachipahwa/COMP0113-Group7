@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1740684368231272914}
   - component: {fileID: 5372377449956592300}
   m_Layer: 0
-  m_Name: Top
+  m_Name: Bottom
   m_TagString: Cake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477861162657811272}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 0, z: -1.44}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 5205587665278712373}
   - component: {fileID: 5727281570995770793}
   m_Layer: 0
-  m_Name: Bottom
+  m_Name: Top
   m_TagString: Cake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2518047857456080887}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 0.313, z: -1.44}
+  m_LocalPosition: {x: 0, y: 0.313, z: 0}
   m_LocalScale: {x: 0.7, y: 0.3, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -242,9 +242,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materials:
   - {fileID: 2100000, guid: 507a040c2296d471283166a92ded480e, type: 2}
-  - {fileID: 2100000, guid: 3dcafe5d691bfcc48b4285f0c0151937, type: 2}
+  - {fileID: 2100000, guid: 214c1eec06198524db48017885512f2d, type: 2}
   - {fileID: 2100000, guid: 6bf299729fba262469c511707829308c, type: 2}
-  - {fileID: 0}
   layers:
   - {fileID: 477861162657811272}
   - {fileID: 2518047857456080887}
