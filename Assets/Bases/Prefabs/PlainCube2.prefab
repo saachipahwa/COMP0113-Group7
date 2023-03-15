@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1740684368231272914}
   - component: {fileID: 5372377449956592300}
   m_Layer: 0
-  m_Name: Top
+  m_Name: Bottom
   m_TagString: Cake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 5205587665278712373}
   - component: {fileID: 5727281570995770793}
   m_Layer: 0
-  m_Name: Bottom
+  m_Name: Top
   m_TagString: Cake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
