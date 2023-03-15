@@ -132,6 +132,14 @@ public class SpawnPrefabButton : MonoBehaviour
     public void setColour(Color c)
     {
         icingColour = c;
+        if (currentPlayerTool != null)
+        {
+            if (currentPlayerTool.name.Contains("Icing"))
+            {
+                var icing_script = currentPlayerTool.GetComponent<IcingBrush>();
+                icing_script.colour = c;
+            }
+        }
     }
 
 

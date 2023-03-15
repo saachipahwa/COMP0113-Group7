@@ -90,7 +90,9 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         public Quaternion nib_rot;
         public string name;
         public bool isIcing;
-        public Color icingColour;
+        public float c_red;
+        public float c_green;
+        public float c_blue;
     }
 
     public void ProcessMessage (ReferenceCountedSceneGraphMessage message)
@@ -100,14 +102,15 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         {
             if (msg.isIcing)
             {
-                placeIcing(msg.nib_pos, msg.nib_rot, msg.icingColour);
+                Color icingColour = new Color(msg.c_red, msg.c_green, msg.c_blue);
+                placeIcing(msg.nib_pos, msg.nib_rot, icingColour);
             }
             transform.position = msg.position;
             transform.rotation = msg.rotation;
         }
     }
 
-    private void placeIcing(Vector3 nib_pos, Quaternion nib_rot, Color? colour_param = null) // potential TODO: add colour as a parameter (will need to add colours into message and processmessage)
+    private void placeIcing(Vector3 nib_pos, Quaternion nib_rot, Color? colour_param = null)
     {
         GameObject sphere = Instantiate(icingTips[icingID], nib_pos, nib_rot);
         sphere.transform.rotation = transform.rotation;
@@ -148,7 +151,9 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
                     nib_pos = nib.transform.position,
                     nib_rot = nib.transform.rotation,
                     name = transform.name,
-                    icingColour = colour
+                    c_red = colour.r,
+                    c_green = colour.g,
+                    c_blue = colour.b                    
                 });
             }
         }
