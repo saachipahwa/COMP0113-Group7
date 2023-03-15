@@ -8,138 +8,82 @@ using Ubiq.Samples;
 
 public class SpawnCake : MonoBehaviour
 {
-    private int objectLabel = 0; // this is to ensure unique names for spawned tools
+    public GameObject toolsMenu;
+    public GameObject basesMenu;
     public GameObject[] prefabToSpawn;
     /*
-    0: icing (sphere)
-    1: icing (star)
-    2: candle
-    3: flower
-    4: strawberry
-    5: eraser
+    0-2: round cake
+    3-6: square cake
     */
-    private GameObject player;
-    // private Hand hand;
-    private GameObject currentPlayerTool = null;
+    private GameObject currentCake = null;
 
     NetworkContext context;
-    //Vector3 Cake_Position = new Vector3((float)0.019, (float)0.143, (float)-0.27);
-    //Vector3 Cake_Position = new Vector3(0,0,0);
 
     void Start()
     {
-        player = GameObject.Find("Player");
         context = NetworkScene.Register(this);
     }
     public void buttonPressedSpawnPrefab(int prefabID)
     {
         SpawnPrefab(prefabID);
     }
-    public void SpawnPrefab(int prefabID, Vector3? pos = null, Quaternion? rot = null, bool owner = true)
+
+    public void SpawnPrefab(int prefabID, bool owner = true)
     {
-        // Debug.Log("here");
-        Vector3 spawnPosition = new Vector3(0, 0, 0);
-        Quaternion spawnRotation = Quaternion.identity;
-
-        /* if we specify a position and rotation, use that. Otherwise use the player's position and rotation
-        if (pos == null)
-        {
-            spawnPosition = player.transform.position;
-        }
-        else
-        {
-            spawnPosition = (Vector3)pos;
-        }
-        if (rot == null)
-        {
-            spawnRotation = player.transform.rotation;
-        }
-        else
-        {
-            spawnRotation = (Quaternion)rot;
-        }
-        */
-
-        /* set the spawn position to be in front of the player
-        Vector3 playerDirection = player.transform.forward;
-        spawnPosition += playerDirection;
-        spawnPosition.y += 0.8f;
-        */
-
         if (owner)
         {
-            // destroy the existing tool if player has one
-            if (currentPlayerTool != null)
+            // destroy the existing cake if exists
+            if (currentCake != null)
             {
                 context.SendJson(new Message()
                 {
-                    position = transform.position,
-                    rotation = transform.rotation,
                     spawn = false,
                     prefab_ID = prefabID,
                     destroy = true,
-                    destroyObjectName = currentPlayerTool.name
+                    destroyObjectName = currentCake.name,
+                    confirm = false
                 });
-                Destroy(currentPlayerTool);
+                Destroy(currentCake);
             }
         }
 
-        // slightly hacky way to spawn the correct icing shape
-        GameObject spawnedObject = Instantiate(prefabToSpawn[prefabID], spawnPosition, spawnRotation);
-        spawnedObject.name = $"{objectLabel}_{spawnedObject.name}";
-        objectLabel++;
-
-        switch (prefabID)
+        Vector3 cakeSpawn = new Vector3(0f, 0.297f, 0f); // so round cakes spawn above the ground
+        if (prefabID > 2)
         {
-            case 0: // circle1
-                Debug.Log("circle");
-                break;
-            case 1: // circle2
-            case 2: // circle3
-            case 3: // square1
-            case 4: // square2
-            case 5: // square3
-            default: //for testing
-                Debug.Log("default");
-                break;
+            cakeSpawn = new Vector3(0f, 0.146f, 0f); // if square cake, move it a bit lower
         }
+
+        currentCake = Instantiate(prefabToSpawn[prefabID], cakeSpawn, Quaternion.identity);
+        currentCake.name = "Cake";
 
         if (owner)
         {
-            currentPlayerTool = spawnedObject;
             context.SendJson(new Message()
             {
-                position = transform.position,
-                rotation = transform.rotation,
                 spawn = true,
                 prefab_ID = prefabID,
                 destroy = false,
-                destroyObjectName = ""
+                destroyObjectName = "",
+                confirm = false
             });
             context.SendJson(new Message()
             {
-                position = transform.position,
-                rotation = transform.rotation,
                 spawn = false,
                 prefab_ID = prefabID,
                 destroy = false,
-                destroyObjectName = ""
+                destroyObjectName = "",
+                confirm = false
             });
         }
-
-        // TODO: if hand is not null, destroy object in hand, then .attach()
     }
-
-
 
     struct Message
     {
-        public Vector3 position;
-        public Quaternion rotation;
         public bool spawn;
         public int prefab_ID;
         public bool destroy;
         public string destroyObjectName;
+        public bool confirm;
     }
 
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
@@ -147,13 +91,42 @@ public class SpawnCake : MonoBehaviour
         var msg = message.FromJson<Message>();
         if (msg.spawn)
         {
-            SpawnPrefab(msg.prefab_ID, msg.position, msg.rotation, false);
+            SpawnPrefab(msg.prefab_ID, false);
         }
         else if (msg.destroy)
         {
             GameObject toDestroy = GameObject.Find(msg.destroyObjectName);
             Destroy(toDestroy);
         }
+        else if (msg.confirm)
+        {
+            Confirm(false);
+        }
+    }
+
+    public void Confirm(bool owner = true)
+    {
+        if (currentCake != null)
+        {
+            if (owner)
+            {
+                context.SendJson(new Message()
+                {
+                    spawn = false,
+                    prefab_ID = -1,
+                    destroy = false,
+                    destroyObjectName = currentCake.name,
+                    confirm = true
+                });
+            }
+            basesMenu.SetActive(false);
+            toolsMenu.SetActive(true);
+        }
+    }
+    public void changeMaterial_button(int x)
+    {
+        var cakeBaseScript = currentCake.GetComponent<CakeBase>();
+        cakeBaseScript.changeMaterial_send_msg(x);
     }
 }
 
