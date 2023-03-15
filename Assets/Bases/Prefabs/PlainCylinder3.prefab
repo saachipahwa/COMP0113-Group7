@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7645003519221015770}
   - component: {fileID: 7645003519221015773}
   - component: {fileID: 7645003519221015772}
-  - component: {fileID: 7645003519221015771}
+  - component: {fileID: 1083647382891906496}
   m_Layer: 0
   m_Name: Middle
   m_TagString: Cake
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7645003519221015771
-CapsuleCollider:
+--- !u!64 &1083647382891906496
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,10 +94,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &7645003520038108505
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 7645003520038108506}
   - component: {fileID: 7645003520038108509}
   - component: {fileID: 7645003520038108508}
-  - component: {fileID: 7645003520038108507}
+  - component: {fileID: 496001443719863400}
   m_Layer: 0
   m_Name: Top
   m_TagString: Cake
@@ -182,8 +182,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7645003520038108507
-CapsuleCollider:
+--- !u!64 &496001443719863400
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -192,10 +192,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &7645003520835400024
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 7645003520835400025}
   - component: {fileID: 7645003520835400028}
   - component: {fileID: 7645003520835400027}
-  - component: {fileID: 7645003520835400026}
+  - component: {fileID: 4449970838799488061}
   m_Layer: 0
   m_Name: Bottom
   m_TagString: Cake
@@ -280,8 +280,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7645003520835400026
-CapsuleCollider:
+--- !u!64 &4449970838799488061
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -290,10 +290,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8631295365805437209
 GameObject:
   m_ObjectHideFlags: 0
