@@ -50322,13 +50322,14 @@ GameObject:
   - component: {fileID: 1626374596}
   - component: {fileID: 1626374595}
   - component: {fileID: 1626374594}
+  - component: {fileID: 1626374598}
   m_Layer: 5
   m_Name: Reset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1626374594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50411,6 +50412,18 @@ RectTransform:
   m_AnchoredPosition: {x: 2.4, y: 1.5}
   m_SizeDelta: {x: 194.5, y: 54.5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1626374598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626374593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cbd4f5d5609ca4595310fdfa657e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1627383666
 GameObject:
   m_ObjectHideFlags: 0
@@ -64852,7 +64865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9d9629eba3f8b4b8b41235a6802df2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MainMenu
 --- !u!114 &2067207681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64900,14 +64912,14 @@ MonoBehaviour:
       - m_Target: {fileID: 2067207680}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: LoadScene
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2067207682
 MonoBehaviour:
