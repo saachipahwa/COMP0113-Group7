@@ -16,7 +16,6 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
 
     public void Grasp(Hand controller)
     {
-        // owner = true;
         if (owner == true)
         {
             grasped = controller;
@@ -29,7 +28,6 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
 
     public void Release(Hand controller)
     {
-        // owner = false;
         grasped = null;
     }
 
@@ -43,12 +41,6 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
         isUsing = false;
     }
 
-    private void Awake()
-    {
-        // owner = false;
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
         context = NetworkScene.Register(this);
@@ -79,16 +71,15 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
 
     void OnTriggerEnter(Collider other)
     {
-        // if (isUsing)
-        // {
+        if (isUsing)
+        {
             if(other.gameObject.tag == "Topping"|| other.gameObject.tag == "Icing")
             {
                 Destroy(other.gameObject);
             }
-        // } 
+        } 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (owner)
