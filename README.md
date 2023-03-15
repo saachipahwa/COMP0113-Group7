@@ -1,5 +1,7 @@
 # COMP0113 Coursework 1 - Group7
-VR Cake decorating game in Unity
+VR Cake decorating application in Unity
+
+Unity Version: 2021.3.16f1
 
 ## Assets Used
 * [Cooking Assets](https://milkandbanana.itch.io/cooking-assets)
