@@ -8,7 +8,7 @@ public class CakeBase : MonoBehaviour
     public GameObject[] layers;
     public int materialIndex;
     
-    void changeMaterial(int x){
+    public void changeMaterial(int x){
         foreach (GameObject layer in layers){
             Renderer renderer = layer.GetComponent<Renderer>();
             layer.GetComponent<MeshRenderer> ().material = materials[x];
@@ -22,8 +22,8 @@ public class CakeBase : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        changeMaterial(materialIndex);
-    }
+    // void Update()
+    // {
+    //     changeMaterial(materialIndex);
+    // }
 }
