@@ -90,6 +90,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         public Quaternion nib_rot;
         public string name;
         public bool isIcing;
+        public Color icingColour;
     }
 
     public void ProcessMessage (ReferenceCountedSceneGraphMessage message)
@@ -99,22 +100,25 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         {
             if (msg.isIcing)
             {
-                placeIcing(msg.nib_pos, msg.nib_rot);
+                placeIcing(msg.nib_pos, msg.nib_rot, msg.icingColour);
             }
             transform.position = msg.position;
             transform.rotation = msg.rotation;
         }
     }
 
-    private void placeIcing(Vector3 nib_pos, Quaternion nib_rot) // potential TODO: add colour as a parameter (will need to add colours into message and processmessage)
+    private void placeIcing(Vector3 nib_pos, Quaternion nib_rot, Color? colour_param = null) // potential TODO: add colour as a parameter (will need to add colours into message and processmessage)
     {
         GameObject sphere = Instantiate(icingTips[icingID], nib_pos, nib_rot);
         sphere.transform.rotation = transform.rotation;
-        // sphere.transform.Rotate(90, 0, 0);
         sphere.name = "Icing";
         sphere.tag = "Icing";
         MeshRenderer meshRenderer = sphere.GetComponent<MeshRenderer>();
-        if (colour != null)
+        if (colour_param != null)
+        {
+            meshRenderer.material.color = (Color)colour_param;
+        }
+        else if (colour != null)
         {
             meshRenderer.material.color = colour;
         }
@@ -143,7 +147,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
                     isIcing = isUsing,
                     nib_pos = nib.transform.position,
                     nib_rot = nib.transform.rotation,
-                    name = transform.name
+                    name = transform.name,
+                    icingColour = colour
                 });
             }
         }

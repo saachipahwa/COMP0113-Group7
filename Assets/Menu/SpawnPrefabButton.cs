@@ -21,6 +21,7 @@ public class SpawnPrefabButton : MonoBehaviour
     private GameObject player;
     // private Hand hand;
     private GameObject currentPlayerTool = null;
+    private Color icingColour;
     NetworkContext context;
 
     void Start()
@@ -90,6 +91,7 @@ public class SpawnPrefabButton : MonoBehaviour
                 var icing_script = spawnedObject.GetComponent<IcingBrush>();
                 icing_script.icingID = prefabID;
                 icing_script.owner = owner;
+                icing_script.colour = icingColour;
                 break;
             case 5: // eraser
                 var eraser_script = spawnedObject.GetComponent<Eraser>();
@@ -125,6 +127,11 @@ public class SpawnPrefabButton : MonoBehaviour
         }
 
         // TODO: if hand is not null, destroy object in hand, then .attach()
+    }
+
+    public void setColour(Color c)
+    {
+        icingColour = c;
     }
 
 
