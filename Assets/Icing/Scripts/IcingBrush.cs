@@ -24,13 +24,6 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     private Quaternion lastRotation;
     private List<GameObject> icingObjects;
 
-    // public void Attach(Hand controller)
-    // {
-    //     Debug.Log($"called: {controller}");
-    //     grasped = controller;
-    //     Debug.Log(grasped);
-    //     owner = true;
-    // }
     public void Grasp(Hand controller)
     {
         if (owner == true)
@@ -41,12 +34,10 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         {
             Release(controller);
         }
-        // owner = true;
     }
 
     public void Release(Hand controller)
     {
-        // owner = false;
         grasped = null;
     }
 
@@ -58,10 +49,6 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     public void UnUse(Hand controller)
     {
         isUsing = false;
-    }
-    private void Awake()
-    {
-        // owner = false;
     }
     void Start()
     {

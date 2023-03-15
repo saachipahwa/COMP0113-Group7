@@ -17,8 +17,6 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 
     public void Grasp(Hand controller)
     {
-        // owner = true;
-        // attached = controller;
         if (owner == true)
         {
             attached = controller;
@@ -31,23 +29,14 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 
     public void Release(Hand controller)
     {
-        // owner = false;
         attached = null;
-    }
-    private void Awake()
-    {
-        // owner = false;
     }
     
     void Start()
     {
         context = NetworkScene.Register(this);
     }
-    // public void Attach(Hand hand)
-    // {
-    //     attached = hand;
-    //     owner = true;
-    // }
+
     public void UnUse(Hand controller)
     {
     }
