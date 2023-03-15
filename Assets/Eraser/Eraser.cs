@@ -51,6 +51,7 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     {
         public Vector3 position;
         public Quaternion rotation;
+        public string name;
         public bool isErasing;
     }
 
@@ -58,15 +59,15 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     {
         // Parse the message
         var msg = message.FromJson<Message>();
-        isUsing = msg.isErasing;
-        
-        // Use the message to update the Component
-        transform.position = msg.position;
-        transform.rotation = msg.rotation;
 
-        // Make sure the logic in Update doesn't trigger as a result of this message
-        lastPosition = transform.position;
-        lastRotation = transform.rotation;    
+        if (msg.name == transform.name)
+        {
+            isUsing = msg.isErasing;
+            
+            // Use the message to update the Component
+            transform.position = msg.position;
+            transform.rotation = msg.rotation;
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -82,22 +83,21 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
 
     void Update()
     {
-        if (owner)
-        {
-            lastPosition = transform.position;
-            lastRotation = transform.rotation;
-            context.SendJson(new Message()
-            {
-                position = transform.localPosition,
-                rotation = transform.localRotation,
-                isErasing = isUsing
-            });
-        }
-    
         if (grasped)
         {
             transform.position = grasped.transform.position;
             transform.rotation = grasped.transform.rotation;
         }
+        if (owner)
+        {
+            context.SendJson(new Message()
+            {
+                position = transform.position,
+                rotation = transform.rotation,
+                name = transform.name,
+                isErasing = isUsing
+            });
+        }
+    
     }
 }
