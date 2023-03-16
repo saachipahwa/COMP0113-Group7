@@ -23,7 +23,7 @@ public class CakeBase : MonoBehaviour
     {
         foreach (GameObject layer in layers){
         Renderer renderer = layer.GetComponent<Renderer>();
-        layer.GetComponent<MeshRenderer> ().material = materials[x];
+        renderer.material = materials[x];
         }
     }
 

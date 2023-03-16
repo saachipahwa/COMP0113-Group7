@@ -9,10 +9,12 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 {
     Hand attached;
     public NetworkId NetworkId { get; set; }
-    public bool owner;
+    private bool owner;
     private NetworkContext context;
     public GameObject topping;
     private bool isPlacing = false;
+    public GameObject indicator;
+    public Material indicator_material_owner;
 
     public void Grasp(Hand controller)
     {
@@ -96,6 +98,16 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
             }
             transform.position = msg.position;
             transform.rotation = msg.rotation;
+        }
+    }
+
+    public void setOwner(bool isOwner)
+    {
+        owner = isOwner;
+        if (owner)
+        {
+            Renderer renderer = indicator.GetComponent<Renderer>();
+            renderer.material = indicator_material_owner;
         }
     }
 }

@@ -10,9 +10,9 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     NetworkContext context;
     private Vector3 lastPosition;
     private Quaternion lastRotation;
-    public bool owner; 
+    private bool owner; 
     private bool isUsing = false;
-    private Rigidbody rigidBody;
+    public GameObject indicator;
 
     public void Grasp(Hand controller)
     {
@@ -44,7 +44,6 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     void Start()
     {
         context = NetworkScene.Register(this);
-        rigidBody = GetComponent<Rigidbody>();
     }
 
     private struct Message
@@ -99,5 +98,11 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
             });
         }
     
+    }
+
+    public void setOwner(bool isOwner)
+    {
+        owner = isOwner;
+        indicator.SetActive(isOwner);
     }
 }

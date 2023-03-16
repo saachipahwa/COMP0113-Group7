@@ -15,7 +15,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     private GameObject cake;
     private Transform nib;
     private GameObject nib_obj;
-    public bool owner;
+    private bool owner;
     private bool isTouchingCake = false;
     private bool isUsing = false;
     private Vector3 prevNibPos;
