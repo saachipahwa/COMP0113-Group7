@@ -62,10 +62,10 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 
     public struct Message
     /* message contains
-    position of topping
-    rotation of topping
-    what topping it is (name)
-    whether user is placing it (placing)
+        position of topping
+        rotation of topping
+        what topping it is (name)
+        whether user is placing it (placing)
     */
     {
         public Vector3 position;

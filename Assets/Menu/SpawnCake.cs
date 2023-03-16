@@ -85,11 +85,11 @@ public class SpawnCake : MonoBehaviour
     struct Message
     /*
     message contains:
-    if a cake was spawned (spawn)
-    what cake it was (prefab_ID)
-    if a cake was destroyed (destroy)
-    which one was destroyed (destroyObjectName)
-    and if cake menu was closed using 'confirm' button (confirm)
+        if a cake was spawned (spawn)
+        what cake it was (prefab_ID)
+        if a cake was destroyed (destroy)
+        which one was destroyed (destroyObjectName)
+        and if cake menu was closed using 'confirm' button (confirm)
     */
     {
         public bool spawn;
