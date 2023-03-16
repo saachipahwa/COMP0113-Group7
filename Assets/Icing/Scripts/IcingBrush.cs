@@ -169,9 +169,9 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         }
     }
 
-    public void setOwner()
+    public void setOwner(bool isOwner)
     {
-        owner = true;
-        indicator.SetActive(true);
+        owner = isOwner;
+        indicator.SetActive(isOwner);
     }
 }
