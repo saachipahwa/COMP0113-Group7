@@ -9,7 +9,6 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
 {
     Hand grasped;
     NetworkContext context;
-    // public NetworkId NetworkId { get; set; }
     public GameObject[] icingTips; //[sphere, star]
     public int icingID;
     public Color colour;
@@ -22,7 +21,6 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     private Vector3 prevNibPos;
     private Vector3 lastPosition;
     private Quaternion lastRotation;
-    private List<GameObject> icingObjects;
 
     public void Grasp(Hand controller)
     {
@@ -65,7 +63,6 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         nib_obj = nib.gameObject;
         context = NetworkScene.Register(this);
         prevNibPos = new Vector3(0f, 0f, 0f);
-        icingObjects = new List<GameObject>();
         cake = GameObject.Find("Cake");
     }
 
@@ -119,7 +116,6 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         sphere.transform.localScale = sphere.transform.localScale * 2f;
         prevNibPos = sphere.transform.position;
         sphere.transform.parent = cake.transform;
-        icingObjects.Add(sphere);
     }
 
     private void FixedUpdate()

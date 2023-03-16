@@ -19,7 +19,6 @@ public class SpawnPrefabButton : MonoBehaviour
     5: eraser
     */
     private GameObject player;
-    // private Hand hand;
     private GameObject currentPlayerTool = null;
     private Color icingColour;
     NetworkContext context;
@@ -35,7 +34,6 @@ public class SpawnPrefabButton : MonoBehaviour
     }
     public void SpawnPrefab(int prefabID, Vector3? pos = null, Quaternion? rot = null, bool owner = true)
     {
-        // Debug.Log("here");
         Vector3 spawnPosition = Vector3.zero;
         Quaternion spawnRotation = Quaternion.identity;
 
@@ -125,8 +123,6 @@ public class SpawnPrefabButton : MonoBehaviour
                 destroyObjectName = ""
             });
         }
-
-        // TODO: if hand is not null, destroy object in hand, then .attach()
     }
 
     public void setColour(Color c)

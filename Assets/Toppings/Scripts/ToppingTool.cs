@@ -8,7 +8,6 @@ using UnityEngine;
 public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
 {
     Hand attached;
-    private Rigidbody body;
     public NetworkId NetworkId { get; set; }
     public bool owner;
     private NetworkContext context;
