@@ -4,6 +4,7 @@ using UnityEngine;
 using Ubiq.XR;
 using Ubiq.Messaging;
 
+//Script is attached to eraser prefab
 public class Eraser : MonoBehaviour, IGraspable, IUseable
 {   
     Hand grasped;
@@ -15,6 +16,7 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     public GameObject indicator;
 
     public void Grasp(Hand controller)
+    //used to keep track of when user is holding the eraser
     {
         if (owner == true)
         {
@@ -27,26 +29,32 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     }
 
     public void Release(Hand controller)
+    //used to keep track of when user stops holding the eraser
     {
         grasped = null;
     }
 
     public void Use(Hand controller) 
+    //used to keep track if user is using the eraser
     {
         isUsing = true;
     }
 
     public void UnUse(Hand controller)
+    //used to keep track if user stops using the eraser
     {
         isUsing = false;
     }
 
     void Start()
+    //start function initialises the networking
     {
         context = NetworkScene.Register(this);
     }
 
     private struct Message
+    //message contains position and rotation of the eraser, 
+    //as well as that it is an eraser, and if it is currently being used.
     {
         public Vector3 position;
         public Quaternion rotation;
@@ -55,6 +63,7 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     }
 
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
+    //sends message to other players
     {
         // Parse the message
         var msg = message.FromJson<Message>();
@@ -70,6 +79,7 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     }
 
     void OnTriggerEnter(Collider other)
+    //when eraser enters a topping or icing blob, it destroys it
     {
         if (isUsing)
         {
@@ -81,6 +91,7 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     }
 
     void Update()
+    //once per frame, owner sends message updating other players of the eraser's status
     {
         if (grasped)
         {
@@ -97,10 +108,11 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
                 isErasing = isUsing
             });
         }
-    
     }
 
     public void setOwner(bool isOwner)
+    //checks if user is owner of tool
+    //akes band visible around eraser if so
     {
         owner = isOwner;
         indicator.SetActive(isOwner);

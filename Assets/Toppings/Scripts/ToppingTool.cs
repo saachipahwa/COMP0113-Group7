@@ -5,6 +5,7 @@ using Ubiq.Spawning;
 using Ubiq.XR;
 using UnityEngine;
 
+//Script is attached to the Candle tool, Flower tool and Strawbrery tool game objects
 public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
 {
     Hand attached;
@@ -17,6 +18,8 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     public Material indicator_material_owner;
 
     public void Grasp(Hand controller)
+    //function detects if user is holding the topping tool
+    //only allows the owner (person who spawned it) to hold it
     {
         if (owner == true)
         {
@@ -29,11 +32,13 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     }
 
     public void Release(Hand controller)
+    //function detects when user stops holding the tool
     {
         attached = null;
     }
     
     void Start()
+    //start function initialises networking
     {
         context = NetworkScene.Register(this);
     }
@@ -43,18 +48,25 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     }
 
     public void Use(Hand controller)
+    //keeps track of when user is using tool
     {
         isPlacing = true;
     }
 
     public void placeTopping(Vector3 pos, Quaternion rot)
+    //function spawns topping at specified position and rotation
     {
         GameObject spawnedTopping = Instantiate(topping, pos, rot);
         isPlacing = false;
     }
 
-
     public struct Message
+    /* message contains
+    position of topping
+    rotation of topping
+    what topping it is (name)
+    whether user is placing it (placing)
+    */
     {
         public Vector3 position;
         public Quaternion rotation;
@@ -63,6 +75,7 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     }
 
     void Update()
+    //once per frame, message is sent to other players updating them of topping tool's behaviour
     {
         if (attached)
         {
@@ -87,6 +100,7 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         }
     }
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
+    //sends message
     {
         var msg = message.FromJson<Message>();
 
@@ -102,6 +116,8 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     }
 
     public void setOwner(bool isOwner)
+    //checks if user is owner of tool
+    //makes band visible around tool if so
     {
         owner = isOwner;
         if (owner)

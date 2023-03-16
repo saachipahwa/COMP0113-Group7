@@ -5,6 +5,7 @@ using Ubiq.XR;
 using Ubiq.Messaging;
 using Ubiq.Spawning;
 
+//Script is attached to Icing brush (game object is just called "Icing")
 public class IcingBrush : MonoBehaviour, IGraspable, IUseable
 {
     Hand grasped;
@@ -24,6 +25,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     public GameObject indicator;
 
     public void Grasp(Hand controller)
+    //used to keep track of when user is holding the eraser
     {
         if (owner == true)
         {
@@ -36,20 +38,25 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
 
     public void Release(Hand controller)
+    //used to keep track of when user stops holding the eraser
     {
         grasped = null;
     }
 
     public void Use(Hand controller) 
+    //used to keep track if user is using the eraser
     {
         isUsing = true;
     }
 
     public void UnUse(Hand controller)
+    //used to keep track if user stops using the eraser
     {
         isUsing = false;
     }
+
     void Start()
+    //start function finds nib and cake objects as well as initialising networking
     {
         Transform[] allChildTransforms = GetComponentsInChildren<Transform>(includeInactive: true);
         foreach (Transform child in allChildTransforms)
@@ -68,6 +75,9 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
 
     struct Message
+    //message includes position and rotation of cake as well as nib,
+    //the name tells the other players this message is about the icing brush
+    //message also includes the colour in RGB format
     {
         public Vector3 position;
         public Quaternion rotation;
@@ -81,6 +91,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
 
     public void ProcessMessage (ReferenceCountedSceneGraphMessage message)
+    //sends message
     {
         var msg = message.FromJson<Message>();
         if (msg.name == transform.name)
@@ -96,6 +107,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
 
     private void placeIcing(Vector3 nib_pos, Quaternion nib_rot, Color? colour_param = null)
+    //places icing blob at the same position and rotation as nib
+    //sets colour using mesh renderer
     {
         GameObject sphere = Instantiate(icingTips[icingID], nib_pos, nib_rot);
         sphere.transform.rotation = transform.rotation;
@@ -120,6 +133,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
 
     private void FixedUpdate()
+    //owner sends message if position or rotation changed
+    //places icing at position and rotation of nib
     {
         if (owner)
         {
@@ -170,6 +185,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
 
     public void setOwner(bool isOwner)
+    //checks if user is owner of tool
+    //makes band visible around icing brush if so
     {
         owner = isOwner;
         indicator.SetActive(isOwner);

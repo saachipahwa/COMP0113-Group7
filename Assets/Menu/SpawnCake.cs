@@ -6,6 +6,7 @@ using Ubiq.Spawning;
 using Ubiq.XR;
 using Ubiq.Samples;
 
+//Script is used by buttons used to create the cakes at the beginning of the app
 public class SpawnCake : MonoBehaviour
 {
     public GameObject toolsMenu;
@@ -20,15 +21,19 @@ public class SpawnCake : MonoBehaviour
     NetworkContext context;
 
     void Start()
+    //start function initialising networking
     {
         context = NetworkScene.Register(this);
     }
     public void buttonPressedSpawnPrefab(int prefabID)
+    //if button is pressed, spawn the specified cake
     {
         SpawnPrefab(prefabID);
     }
 
     public void SpawnPrefab(int prefabID, bool owner = true)
+    //destroys current cake and spawns a new one
+    //sends message to destroy current cake and to spawn a new one for other players
     {
         if (owner)
         {
@@ -78,6 +83,14 @@ public class SpawnCake : MonoBehaviour
     }
 
     struct Message
+    /*
+    message contains:
+    if a cake was spawned (spawn)
+    what cake it was (prefab_ID)
+    if a cake was destroyed (destroy)
+    which one was destroyed (destroyObjectName)
+    and if cake menu was closed using 'confirm' button (confirm)
+    */
     {
         public bool spawn;
         public int prefab_ID;
@@ -87,6 +100,7 @@ public class SpawnCake : MonoBehaviour
     }
 
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
+    //sends message depending on if cake was spawned, destroyed or if menu was closed
     {
         var msg = message.FromJson<Message>();
         if (msg.spawn)
@@ -105,6 +119,9 @@ public class SpawnCake : MonoBehaviour
     }
 
     public void Confirm(bool owner = true)
+    //is called when menu is shut 
+    //spawns second menu
+
     {
         if (currentCake != null)
         {
