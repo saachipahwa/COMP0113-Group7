@@ -21,6 +21,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     private Vector3 prevNibPos;
     private Vector3 lastPosition;
     private Quaternion lastRotation;
+    public GameObject indicator;
 
     public void Grasp(Hand controller)
     {
@@ -50,7 +51,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
     void Start()
     {
-        Transform[] allChildTransforms = GetComponentsInChildren<Transform>(includeInactive: false);
+        Transform[] allChildTransforms = GetComponentsInChildren<Transform>(includeInactive: true);
         foreach (Transform child in allChildTransforms)
         {
             if (child.name == "Nib")
@@ -168,4 +169,9 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         }
     }
 
+    public void setOwner()
+    {
+        owner = true;
+        indicator.SetActive(true);
+    }
 }

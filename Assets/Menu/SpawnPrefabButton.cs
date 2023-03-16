@@ -88,7 +88,8 @@ public class SpawnPrefabButton : MonoBehaviour
             case 1: 
                 var icing_script = spawnedObject.GetComponent<IcingBrush>();
                 icing_script.icingID = prefabID;
-                icing_script.owner = owner;
+                // icing_script.owner = owner;
+                icing_script.setOwner();
                 icing_script.colour = icingColour;
                 break;
             case 5: // eraser
