@@ -5,7 +5,7 @@ using Ubiq.Spawning;
 using Ubiq.XR;
 using UnityEngine;
 
-//Script is attached to the Candle tool, Flower tool and Strawbrery tool game objects
+// Script is attached to the Candle tool, Flower tool and Strawbrery tool (and any other topping tools) game objects
 public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnable
 {
     Hand attached;
@@ -18,10 +18,9 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     public Material indicator_material_owner;
 
     public void Grasp(Hand controller)
-    //function detects if user is holding the topping tool
-    //only allows the owner (person who spawned it) to hold it
+    // keep track of when user is holding the topping tool
     {
-        if (owner == true)
+        if (owner == true) // only owners can grab the tool
         {
             attached = controller;
         }
@@ -31,14 +30,13 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         }
     }
 
+    // keep track of when user stops holding the topping tool
     public void Release(Hand controller)
-    //function detects when user stops holding the tool
     {
         attached = null;
     }
     
     void Start()
-    //start function initialises networking
     {
         context = NetworkScene.Register(this);
     }
@@ -47,14 +45,14 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     {
     }
 
+    // keeps track of when user is using topping tool
     public void Use(Hand controller)
-    //keeps track of when user is using tool
     {
         isPlacing = true;
     }
 
+    // spawns topping at specified position (pos) and rotation (rot)
     public void placeTopping(Vector3 pos, Quaternion rot)
-    //function spawns topping at specified position and rotation
     {
         GameObject spawnedTopping = Instantiate(topping, pos, rot);
         isPlacing = false;
@@ -74,8 +72,8 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         public bool placing;
     }
 
-    void Update()
     // called once per frame
+    void Update()
     {
         if (attached) // tool follows hand if grabbing
         {
@@ -100,7 +98,6 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         }
     }
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
-    // sends message
     {
         var msg = message.FromJson<Message>();
 

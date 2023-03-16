@@ -26,10 +26,10 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     public Material indicator_material_owner;
 
 
+    // keep track of when user is holding the icing bag
     public void Grasp(Hand controller)
-    //used to keep track of when user is holding the eraser
     {
-        if (owner == true)
+        if (owner == true) // only owners can grab the tool
         {
             grasped = controller;
         }
@@ -39,26 +39,25 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         }
     }
 
+    // keep track of when user stops holding the icing bag
     public void Release(Hand controller)
-    //used to keep track of when user stops holding the eraser
     {
         grasped = null;
     }
 
+    // keep track if user is using the icing bag
     public void Use(Hand controller) 
-    //used to keep track if user is using the eraser
     {
         isUsing = true;
     }
 
+    // keep track if user stops using the icing bag
     public void UnUse(Hand controller)
-    //used to keep track if user stops using the eraser
     {
         isUsing = false;
     }
 
     void Start()
-    //start function finds nib and cake objects as well as initialising networking
     {
         Transform[] allChildTransforms = GetComponentsInChildren<Transform>(includeInactive: true);
         foreach (Transform child in allChildTransforms)
@@ -77,10 +76,10 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
 
     struct Message
-    //message includes position and rotation of cake as well as nib,
-    //the name tells the other players this message is about the icing brush
-    //message also includes the colour in RGB format
     {
+        // message includes position and rotation of icing brush as well as the nib,
+        // the name tells the other players this message is about the icing brush
+        // message also includes the colour in RGB format, and whether the owner is currently using the icing bag or not
         public Vector3 position;
         public Quaternion rotation;
         public Vector3 nib_pos;
@@ -93,14 +92,13 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
 
     public void ProcessMessage (ReferenceCountedSceneGraphMessage message)
-    //sends message
     {
         var msg = message.FromJson<Message>();
         if (msg.name == transform.name)
         {
             if (msg.isIcing)
             {
-                Color icingColour = new Color(msg.c_red, msg.c_green, msg.c_blue);
+                Color icingColour = new Color(msg.c_red, msg.c_green, msg.c_blue); // create colour from RGB values
                 placeIcing(msg.nib_pos, msg.nib_rot, icingColour);
             }
             transform.position = msg.position;
@@ -109,9 +107,14 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
 
     private void placeIcing(Vector3 nib_pos, Quaternion nib_rot, Color? colour_param = null)
-    //places icing blob at the same position and rotation as nib
-    //sets colour using mesh renderer
     {
+        /*
+        places icing blob at the same position and rotation as nib, sets the colour, and adjusts the size to be appropriate
+
+        nib_pos: position of the nib 
+        nib_rot: rotation of the nib
+        colour_param: change colour to the colour_param if exists, otherwise use colour variable
+        */
         GameObject sphere = Instantiate(icingTips[icingID], nib_pos, nib_rot);
         sphere.transform.rotation = transform.rotation;
         sphere.name = "Icing";
@@ -131,12 +134,12 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         }
         sphere.transform.localScale = sphere.transform.localScale * 2f;
         prevNibPos = sphere.transform.position;
-        sphere.transform.parent = cake.transform;
+        sphere.transform.parent = cake.transform; // icing becomes a child of the cake object
     }
 
+    // owner sends message if position or rotation changed
+    // places icing at position and rotation of nib if touching cake
     private void FixedUpdate()
-    //owner sends message if position or rotation changed
-    //places icing at position and rotation of nib
     {
         if (owner)
         {
@@ -187,8 +190,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     }
 
     public void setOwner(bool isOwner)
-    //checks if user is owner of tool
-    //makes band visible around icing brush if so
+    // sets 'owner' of tool
+    // if owner, make band green to indicate it's your tool
     {
         owner = isOwner;
         if (owner)

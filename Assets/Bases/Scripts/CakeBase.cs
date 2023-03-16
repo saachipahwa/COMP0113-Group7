@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ubiq.Messaging;
 
-//This script is attached to all cake prefabs.
+// This script is attached to all cake prefabs.
 public class CakeBase : MonoBehaviour
 {
     NetworkContext context; 
@@ -11,8 +11,8 @@ public class CakeBase : MonoBehaviour
     public GameObject[] layers;
     public int materialIndex;
     
+    // sends message with material id for other users to change the cake colour to the selected one
     public void changeMaterial_send_msg(int x)
-    //sends message to change material for other users
     {
         context.SendJson(new Message()
         {
@@ -21,8 +21,8 @@ public class CakeBase : MonoBehaviour
         changeMaterial(x);
     }
 
+    // changes material of cake
     private void changeMaterial(int x)
-    //changes material from mwnu
     {
         foreach (GameObject layer in layers){
         Renderer renderer = layer.GetComponent<Renderer>();
@@ -31,20 +31,17 @@ public class CakeBase : MonoBehaviour
     }
 
     void Start()
-    //start function changes material to default 
     {
         changeMaterial(materialIndex);
         context = NetworkScene.Register(this);
     }
 
     struct Message
-    //networking contains the material
     {
         public int materialID;
     }
 
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
-    //sends message
     {
         var msg = message.FromJson<Message>();
         changeMaterial(msg.materialID);

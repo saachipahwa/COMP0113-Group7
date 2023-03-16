@@ -6,7 +6,7 @@ using Ubiq.Spawning;
 using Ubiq.XR;
 using Ubiq.Samples;
 
-//Script is used by buttons used to create the cakes at the beginning of the app
+// Script is attached to CakeSpawnManager and contains methods used by buttons used to create the cakes at the start, as well as the buttons to change the flavour of the cake
 public class SpawnCake : MonoBehaviour
 {
     public GameObject toolsMenu;
@@ -21,19 +21,18 @@ public class SpawnCake : MonoBehaviour
     NetworkContext context;
 
     void Start()
-    //start function initialising networking
     {
         context = NetworkScene.Register(this);
     }
+    // if button is pressed, spawn the specified cake
     public void buttonPressedSpawnPrefab(int prefabID)
-    //if button is pressed, spawn the specified cake
     {
         SpawnPrefab(prefabID);
     }
 
+    // destroys current cake if exists and spawns a new one
+    // sends message to destroy current cake and to spawn a new one for other players
     public void SpawnPrefab(int prefabID, bool owner = true)
-    //destroys current cake and spawns a new one
-    //sends message to destroy current cake and to spawn a new one for other players
     {
         if (owner)
         {
@@ -99,8 +98,8 @@ public class SpawnCake : MonoBehaviour
         public bool confirm;
     }
 
+    // acts upon message depending on if cake was spawned, destroyed or if menu was closed
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
-    //sends message depending on if cake was spawned, destroyed or if menu was closed
     {
         var msg = message.FromJson<Message>();
         if (msg.spawn)
@@ -119,9 +118,7 @@ public class SpawnCake : MonoBehaviour
     }
 
     public void Confirm(bool owner = true)
-    //is called when menu is shut 
-    //spawns second menu
-
+    // called when confirm is pressed and spawns second menu
     {
         if (currentCake != null)
         {
@@ -140,6 +137,8 @@ public class SpawnCake : MonoBehaviour
             toolsMenu.SetActive(true);
         }
     }
+
+    // called when the buttons to change flavour are pressed
     public void changeMaterial_button(int x)
     {
         var cakeBaseScript = currentCake.GetComponent<CakeBase>();

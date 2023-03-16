@@ -8,6 +8,8 @@ using Ubiq.Samples;
 
 public class SpawnPrefabButton : MonoBehaviour
 {
+    // This script is attached onto the ToolSpawnManager and has methods used by buttons in the tools selection menu to spawn the correct tool and assign its owner
+
     private int objectLabel = 0; // this is to ensure unique names for spawned tools
     public GameObject[] prefabToSpawn;
     /*
@@ -28,12 +30,21 @@ public class SpawnPrefabButton : MonoBehaviour
         player = GameObject.Find("Player");
         context = NetworkScene.Register(this);
     }
-    public void buttonPressedSpawnPrefab(int prefabID)
+    public void buttonPressedSpawnPrefab(int prefabID) // method used by button OnClick events
     {
         SpawnPrefab(prefabID);
     }
     public void SpawnPrefab(int prefabID, Vector3? pos = null, Quaternion? rot = null, bool owner = true)
     {
+        /*
+        Spawns the prefab
+        
+        prefabID: the index of the prefab to be spawned
+        pos: position to spawn prefab, will be player's position if not specified
+        rot: rotation to spawn prefab, will be player's rotation if not specified
+        owner: whether the player is the owner of the tool
+
+        */
         Vector3 spawnPosition = Vector3.zero;
         Quaternion spawnRotation = Quaternion.identity;
 
@@ -100,7 +111,8 @@ public class SpawnPrefabButton : MonoBehaviour
                 topping_script.setOwner(owner);
                 break;
         }
-
+        
+        // if player is the owner, we send a message to others to tell them to spawn a tool
         if (owner)
         {
             currentPlayerTool = spawnedObject;
@@ -125,7 +137,7 @@ public class SpawnPrefabButton : MonoBehaviour
         }
     }
 
-    public void setColour(Color c)
+    public void setColour(Color c) // sets colour of icing brush
     {
         icingColour = c;
         if (currentPlayerTool != null)
@@ -141,22 +153,23 @@ public class SpawnPrefabButton : MonoBehaviour
 
     struct Message
     {
-        public Vector3 position;
-        public Quaternion rotation;
-        public bool spawn;
-        public int prefab_ID;
-        public bool destroy;
-        public string destroyObjectName;
+        public Vector3 position; // position to spawn prefab
+        public Quaternion rotation; // rotation to spawn prefab
+        public bool spawn; // spawning flag
+        public int prefab_ID; // prefab index
+        public bool destroy; // destroying flag
+        public string destroyObjectName; // object name to destroy
     }
 
     public void ProcessMessage (ReferenceCountedSceneGraphMessage message)
     {
         var msg = message.FromJson<Message>();
+        // if spawn flag, then spawn prefab at position and rotation specified in message. ensure owner is set to false
         if (msg.spawn)
         {
             SpawnPrefab(msg.prefab_ID, msg.position, msg.rotation, false);
         }
-        else if (msg.destroy)
+        else if (msg.destroy) // if destroy flag, destroy the object with the name specified in the message
         {
             GameObject toDestroy = GameObject.Find(msg.destroyObjectName);
             Destroy(toDestroy);
