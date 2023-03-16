@@ -47,7 +47,7 @@ public class SpawnCake : MonoBehaviour
             }
         }
 
-        Vector3 cakeSpawn = new Vector3(0f, 0.297f, 0f); // so round cakes spawn above the ground
+        Vector3 cakeSpawn = new Vector3(0f, 0.126f, 0f); // so round cakes spawn above the ground
         if (prefabID > 2)
         {
             cakeSpawn = new Vector3(0f, 0.146f, 0f); // if square cake, move it a bit lower
