@@ -331,7 +331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5687393570225157145
 Transform:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f145bcbe919651d43a407ec5ae48c553, type: 2}
+  - {fileID: 2100000, guid: b5184331926468d459bfd524c207aa9d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -848,8 +848,8 @@ MonoBehaviour:
   - {fileID: 993926549233606890, guid: 2c95950270fcf6f4fa34162ad2d1a4cf, type: 3}
   icingID: 1
   colour: {r: 0, g: 0, b: 0, a: 0}
-  owner: 0
   indicator: {fileID: 3578796410504479515}
+  indicator_material_owner: {fileID: 2100000, guid: 47b5ae940de1c8b419f50f7271074c9c, type: 2}
 --- !u!1 &6308350561402317258
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,6 +23,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     private Vector3 lastPosition;
     private Quaternion lastRotation;
     public GameObject indicator;
+    public Material indicator_material_owner;
+
 
     public void Grasp(Hand controller)
     //used to keep track of when user is holding the eraser
@@ -189,6 +191,10 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     //makes band visible around icing brush if so
     {
         owner = isOwner;
-        indicator.SetActive(isOwner);
+        if (owner)
+        {
+            Renderer renderer = indicator.GetComponent<Renderer>();
+            renderer.material = indicator_material_owner;
+        }
     }
 }

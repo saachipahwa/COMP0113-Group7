@@ -65,7 +65,7 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         position of topping
         rotation of topping
         what topping it is (name)
-        whether user is placing it (placing)
+        whether user used tool (placing)
     */
     {
         public Vector3 position;
@@ -75,15 +75,15 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     }
 
     void Update()
-    //once per frame, message is sent to other players updating them of topping tool's behaviour
+    // called once per frame
     {
-        if (attached)
+        if (attached) // tool follows hand if grabbing
         {
             transform.position = attached.transform.position;
             transform.rotation = attached.transform.rotation;
         }
 
-        if (owner)
+        if (owner) // send message to other players updating them of topping tool's behaviour
         {
             context.SendJson(new Message()
             {
@@ -94,13 +94,13 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
             });
         }
 
-        if (isPlacing)
+        if (isPlacing) // place a topping
         {
             placeTopping(transform.position, transform.rotation);
         }
     }
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
-    //sends message
+    // sends message
     {
         var msg = message.FromJson<Message>();
 
@@ -116,8 +116,8 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     }
 
     public void setOwner(bool isOwner)
-    //checks if user is owner of tool
-    //makes band visible around tool if so
+    // sets 'owner' of tool
+    // if owner, make band green to indicate it's your tool
     {
         owner = isOwner;
         if (owner)

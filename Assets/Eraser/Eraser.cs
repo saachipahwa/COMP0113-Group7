@@ -14,6 +14,8 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     private bool owner; 
     private bool isUsing = false;
     public GameObject indicator;
+    public Material indicator_material_owner;
+
 
     public void Grasp(Hand controller)
     //used to keep track of when user is holding the eraser
@@ -115,6 +117,10 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     //akes band visible around eraser if so
     {
         owner = isOwner;
-        indicator.SetActive(isOwner);
+        if (owner)
+        {
+            Renderer renderer = indicator.GetComponent<Renderer>();
+            renderer.material = indicator_material_owner;
+        }
     }
 }
