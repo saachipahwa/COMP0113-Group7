@@ -68,7 +68,7 @@ public class SpawnPrefabButton : MonoBehaviour
         // set the spawn position to be in front of the player
         Vector3 playerDirection = player.transform.forward;
         spawnPosition += playerDirection * 0.5f;
-        spawnPosition.y += 0.8f;
+        spawnPosition.y += 1f;
 
         if (owner)
         {
