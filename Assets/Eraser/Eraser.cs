@@ -13,6 +13,7 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     private Quaternion lastRotation;
     private bool owner; 
     private bool isUsing = false;
+    private GameObject collidingObj;
     public GameObject indicator;
     public Material indicator_material_owner;
 
@@ -76,16 +77,25 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
         }
     }
 
-    // when eraser colliders with a topping or icing blob, it destroys it
+    // when eraser colliders with a topping or icing blob, set isColliding to true so eraser knows what to destroy
     void OnTriggerEnter(Collider other)
     {
-        if (isUsing)
+        if (other.gameObject.tag == "Topping"|| other.gameObject.tag == "Icing")
         {
-            if(other.gameObject.tag == "Topping"|| other.gameObject.tag == "Icing")
+            if (isUsing)
             {
-                Destroy(other.gameObject);
+                Destroy(other.gameObject);          
             }
-        } 
+            else
+            {
+                collidingObj = other.gameObject;
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        collidingObj = null;
     }
 
     // once per frame, owner sends message updating other players of the eraser's status, also keep tool in hand if grasped
@@ -108,9 +118,20 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
         }
     }
 
-    public void setOwner(bool isOwner)
+    public void LateUpdate()
+    {
+        if (isUsing)
+        {
+            if (collidingObj != null)
+            {
+                Destroy(collidingObj);
+            }
+        }
+    }
+
     // sets 'owner' of eraser
     // if owner, make band green to indicate it's your tool
+    public void setOwner(bool isOwner)
     {
         owner = isOwner;
         if (owner)

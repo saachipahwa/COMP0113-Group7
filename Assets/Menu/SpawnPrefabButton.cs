@@ -6,9 +6,9 @@ using Ubiq.Spawning;
 using Ubiq.XR;
 using Ubiq.Samples;
 
+// This script is attached onto the ToolSpawnManager and has methods used by buttons in the tools selection menu to spawn the correct tool and assign its owner
 public class SpawnPrefabButton : MonoBehaviour
 {
-    // This script is attached onto the ToolSpawnManager and has methods used by buttons in the tools selection menu to spawn the correct tool and assign its owner
 
     private int objectLabel = 0; // this is to ensure unique names for spawned tools
     public GameObject[] prefabToSpawn;

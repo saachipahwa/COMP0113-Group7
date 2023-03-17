@@ -112,9 +112,9 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         }
     }
 
-    public void setOwner(bool isOwner)
     // sets 'owner' of tool
     // if owner, make band green to indicate it's your tool
+    public void setOwner(bool isOwner)
     {
         owner = isOwner;
         if (owner)

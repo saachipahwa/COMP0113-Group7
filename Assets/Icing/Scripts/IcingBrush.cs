@@ -189,9 +189,9 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         }
     }
 
-    public void setOwner(bool isOwner)
     // sets 'owner' of tool
     // if owner, make band green to indicate it's your tool
+    public void setOwner(bool isOwner)
     {
         owner = isOwner;
         if (owner)
