@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276797, g: 0.2158917, b: 0.29782546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2222,6 +2222,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 927174960, guid: c46d94a4404a9564f9b816447b468ccd, type: 3}
+      propertyPath: m_Text
+      value: 'Use the tool to drop/place a topping
+
+
+        You can only use your
+        own tool
+
+
+        Green band indicates that it is yours
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834953023696186, guid: c46d94a4404a9564f9b816447b468ccd, type: 3}
+      propertyPath: m_Text
+      value: 'Icing will only appear if used on the cake
+
+        Green band indicates
+        that it is yours'
+      objectReference: {fileID: 0}
     - target: {fileID: 112372470208522669, guid: c46d94a4404a9564f9b816447b468ccd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
