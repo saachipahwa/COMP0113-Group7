@@ -6,8 +6,10 @@ using Ubiq.Spawning;
 using Ubiq.XR;
 using Ubiq.Samples;
 
+// This script is attached onto the ToolSpawnManager and has methods used by buttons in the tools selection menu to spawn the correct tool and assign its owner
 public class SpawnPrefabButton : MonoBehaviour
 {
+
     private int objectLabel = 0; // this is to ensure unique names for spawned tools
     public GameObject[] prefabToSpawn;
     /*
@@ -28,12 +30,21 @@ public class SpawnPrefabButton : MonoBehaviour
         player = GameObject.Find("Player");
         context = NetworkScene.Register(this);
     }
-    public void buttonPressedSpawnPrefab(int prefabID)
+    public void buttonPressedSpawnPrefab(int prefabID) // method used by button OnClick events
     {
         SpawnPrefab(prefabID);
     }
     public void SpawnPrefab(int prefabID, Vector3? pos = null, Quaternion? rot = null, bool owner = true)
     {
+        /*
+        Spawns the prefab
+        
+        prefabID: the index of the prefab to be spawned
+        pos: position to spawn prefab, will be player's position if not specified
+        rot: rotation to spawn prefab, will be player's rotation if not specified
+        owner: whether the player is the owner of the tool
+
+        */
         Vector3 spawnPosition = Vector3.zero;
         Quaternion spawnRotation = Quaternion.identity;
 
@@ -56,8 +67,8 @@ public class SpawnPrefabButton : MonoBehaviour
 
         // set the spawn position to be in front of the player
         Vector3 playerDirection = player.transform.forward;
-        spawnPosition += playerDirection;
-        spawnPosition.y += 0.8f;
+        spawnPosition += playerDirection * 0.5f;
+        spawnPosition.y += 1f;
 
         if (owner)
         {
@@ -88,19 +99,20 @@ public class SpawnPrefabButton : MonoBehaviour
             case 1: 
                 var icing_script = spawnedObject.GetComponent<IcingBrush>();
                 icing_script.icingID = prefabID;
-                icing_script.owner = owner;
+                icing_script.setOwner(owner);
                 icing_script.colour = icingColour;
                 break;
             case 5: // eraser
                 var eraser_script = spawnedObject.GetComponent<Eraser>();
-                eraser_script.owner = owner;
+                eraser_script.setOwner(owner);
                 break;
             default: // toppings
                 var topping_script = spawnedObject.GetComponent<ToppingTool>();
-                topping_script.owner = owner;
+                topping_script.setOwner(owner);
                 break;
         }
-
+        
+        // if player is the owner, we send a message to others to tell them to spawn a tool
         if (owner)
         {
             currentPlayerTool = spawnedObject;
@@ -125,7 +137,7 @@ public class SpawnPrefabButton : MonoBehaviour
         }
     }
 
-    public void setColour(Color c)
+    public void setColour(Color c) // sets colour of icing brush
     {
         icingColour = c;
         if (currentPlayerTool != null)
@@ -141,22 +153,23 @@ public class SpawnPrefabButton : MonoBehaviour
 
     struct Message
     {
-        public Vector3 position;
-        public Quaternion rotation;
-        public bool spawn;
-        public int prefab_ID;
-        public bool destroy;
-        public string destroyObjectName;
+        public Vector3 position; // position to spawn prefab
+        public Quaternion rotation; // rotation to spawn prefab
+        public bool spawn; // spawning flag
+        public int prefab_ID; // prefab index
+        public bool destroy; // destroying flag
+        public string destroyObjectName; // object name to destroy
     }
 
     public void ProcessMessage (ReferenceCountedSceneGraphMessage message)
     {
         var msg = message.FromJson<Message>();
+        // if spawn flag, then spawn prefab at position and rotation specified in message. ensure owner is set to false
         if (msg.spawn)
         {
             SpawnPrefab(msg.prefab_ID, msg.position, msg.rotation, false);
         }
-        else if (msg.destroy)
+        else if (msg.destroy) // if destroy flag, destroy the object with the name specified in the message
         {
             GameObject toDestroy = GameObject.Find(msg.destroyObjectName);
             Destroy(toDestroy);

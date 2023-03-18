@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ubiq.Messaging;
 
-
+// This script is attached to all cake prefabs.
 public class CakeBase : MonoBehaviour
 {
-    NetworkContext context;
+    NetworkContext context; 
     public Material[] materials; //[vanilla, chocolate, strawberry]
     public GameObject[] layers;
     public int materialIndex;
     
-    public void changeMaterial_send_msg(int x){
+    // sends message with material id for other users to change the cake colour to the selected one
+    public void changeMaterial_send_msg(int x)
+    {
         context.SendJson(new Message()
         {
             materialID = x
@@ -19,11 +21,12 @@ public class CakeBase : MonoBehaviour
         changeMaterial(x);
     }
 
+    // changes material of cake
     private void changeMaterial(int x)
     {
         foreach (GameObject layer in layers){
         Renderer renderer = layer.GetComponent<Renderer>();
-        layer.GetComponent<MeshRenderer> ().material = materials[x];
+        renderer.material = materials[x];
         }
     }
 

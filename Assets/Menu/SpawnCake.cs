@@ -6,6 +6,7 @@ using Ubiq.Spawning;
 using Ubiq.XR;
 using Ubiq.Samples;
 
+// Script is attached to CakeSpawnManager and contains methods used by buttons used to create the cakes at the start, as well as the buttons to change the flavour of the cake
 public class SpawnCake : MonoBehaviour
 {
     public GameObject toolsMenu;
@@ -23,11 +24,14 @@ public class SpawnCake : MonoBehaviour
     {
         context = NetworkScene.Register(this);
     }
+    // if button is pressed, spawn the specified cake
     public void buttonPressedSpawnPrefab(int prefabID)
     {
         SpawnPrefab(prefabID);
     }
 
+    // destroys current cake if exists and spawns a new one
+    // sends message to destroy current cake and to spawn a new one for other players
     public void SpawnPrefab(int prefabID, bool owner = true)
     {
         if (owner)
@@ -78,6 +82,14 @@ public class SpawnCake : MonoBehaviour
     }
 
     struct Message
+    /*
+    message contains:
+        if a cake was spawned (spawn)
+        what cake it was (prefab_ID)
+        if a cake was destroyed (destroy)
+        which one was destroyed (destroyObjectName)
+        and if cake menu was closed using 'confirm' button (confirm)
+    */
     {
         public bool spawn;
         public int prefab_ID;
@@ -86,6 +98,7 @@ public class SpawnCake : MonoBehaviour
         public bool confirm;
     }
 
+    // acts upon message depending on if cake was spawned, destroyed or if menu was closed
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
     {
         var msg = message.FromJson<Message>();
@@ -105,6 +118,7 @@ public class SpawnCake : MonoBehaviour
     }
 
     public void Confirm(bool owner = true)
+    // called when confirm is pressed and spawns second menu
     {
         if (currentCake != null)
         {
@@ -123,6 +137,8 @@ public class SpawnCake : MonoBehaviour
             toolsMenu.SetActive(true);
         }
     }
+
+    // called when the buttons to change flavour are pressed
     public void changeMaterial_button(int x)
     {
         var cakeBaseScript = currentCake.GetComponent<CakeBase>();

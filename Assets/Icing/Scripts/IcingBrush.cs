@@ -5,6 +5,7 @@ using Ubiq.XR;
 using Ubiq.Messaging;
 using Ubiq.Spawning;
 
+//Script is attached to Icing brush (game object is just called "Icing")
 public class IcingBrush : MonoBehaviour, IGraspable, IUseable
 {
     Hand grasped;
@@ -15,16 +16,20 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     private GameObject cake;
     private Transform nib;
     private GameObject nib_obj;
-    public bool owner;
+    private bool owner;
     private bool isTouchingCake = false;
     private bool isUsing = false;
     private Vector3 prevNibPos;
     private Vector3 lastPosition;
     private Quaternion lastRotation;
+    public GameObject indicator;
+    public Material indicator_material_owner;
 
+
+    // keep track of when user is holding the icing bag
     public void Grasp(Hand controller)
     {
-        if (owner == true)
+        if (owner == true) // only owners can grab the tool
         {
             grasped = controller;
         }
@@ -34,23 +39,27 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         }
     }
 
+    // keep track of when user stops holding the icing bag
     public void Release(Hand controller)
     {
         grasped = null;
     }
 
+    // keep track if user is using the icing bag
     public void Use(Hand controller) 
     {
         isUsing = true;
     }
 
+    // keep track if user stops using the icing bag
     public void UnUse(Hand controller)
     {
         isUsing = false;
     }
+
     void Start()
     {
-        Transform[] allChildTransforms = GetComponentsInChildren<Transform>(includeInactive: false);
+        Transform[] allChildTransforms = GetComponentsInChildren<Transform>(includeInactive: true);
         foreach (Transform child in allChildTransforms)
         {
             if (child.name == "Nib")
@@ -68,6 +77,9 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
 
     struct Message
     {
+        // message includes position and rotation of icing brush as well as the nib,
+        // the name tells the other players this message is about the icing brush
+        // message also includes the colour in RGB format, and whether the owner is currently using the icing bag or not
         public Vector3 position;
         public Quaternion rotation;
         public Vector3 nib_pos;
@@ -86,7 +98,7 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         {
             if (msg.isIcing)
             {
-                Color icingColour = new Color(msg.c_red, msg.c_green, msg.c_blue);
+                Color icingColour = new Color(msg.c_red, msg.c_green, msg.c_blue); // create colour from RGB values
                 placeIcing(msg.nib_pos, msg.nib_rot, icingColour);
             }
             transform.position = msg.position;
@@ -96,6 +108,13 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
 
     private void placeIcing(Vector3 nib_pos, Quaternion nib_rot, Color? colour_param = null)
     {
+        /*
+        places icing blob at the same position and rotation as nib, sets the colour, and adjusts the size to be appropriate
+
+        nib_pos: position of the nib 
+        nib_rot: rotation of the nib
+        colour_param: change colour to the colour_param if exists, otherwise use colour variable
+        */
         GameObject sphere = Instantiate(icingTips[icingID], nib_pos, nib_rot);
         sphere.transform.rotation = transform.rotation;
         sphere.name = "Icing";
@@ -115,9 +134,11 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         }
         sphere.transform.localScale = sphere.transform.localScale * 2f;
         prevNibPos = sphere.transform.position;
-        sphere.transform.parent = cake.transform;
+        sphere.transform.parent = cake.transform; // icing becomes a child of the cake object
     }
 
+    // owner sends message if position or rotation changed
+    // places icing at position and rotation of nib if touching cake
     private void FixedUpdate()
     {
         if (owner)
@@ -168,4 +189,15 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
         }
     }
 
+    // sets 'owner' of tool
+    // if owner, make band green to indicate it's your tool
+    public void setOwner(bool isOwner)
+    {
+        owner = isOwner;
+        if (owner)
+        {
+            Renderer renderer = indicator.GetComponent<Renderer>();
+            renderer.material = indicator_material_owner;
+        }
+    }
 }

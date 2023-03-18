@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Ubiq.Messaging;
 
-
+// Script used to restart game
+// Does not work so is not currently part of the application 
 public class ChangeScene : MonoBehaviour
 {
     NetworkContext context;

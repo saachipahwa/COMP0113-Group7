@@ -4,7 +4,7 @@ using UnityEngine;
 using Ubiq.Messaging;
 using Ubiq.Spawning;
 
-
+// Script is attached to Strawberry, Flower and Candle (and any other toppings) game objects
 public class Topping : MonoBehaviour
 {
     Transform lastPlacement;
@@ -18,17 +18,15 @@ public class Topping : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    void Update()
-    {
-    }
 
-    private void OnTriggerEnter(Collider other)
+    // Detects collision with floor and cake and acts accordingly
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Cake")
+        if (other.collider.tag == "Cake")
         {
-            rigidBody.isKinematic = true;
+            rigidBody.isKinematic = true; // remove physics of topping
         }
-        if (other.gameObject.tag == "Floor")
+        if (other.collider.tag == "Floor")
         {
             Destroy(gameObject, 5); // destroy gameobject after 5s of touching floor
         }
