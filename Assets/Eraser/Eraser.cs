@@ -80,7 +80,7 @@ public class Eraser : MonoBehaviour, IGraspable, IUseable
     // when eraser colliders with a topping or icing blob, set isColliding to true so eraser knows what to destroy
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Topping"|| other.gameObject.tag == "Icing")
+        if (other.gameObject.tag == "Topping"|| other.gameObject.tag == "Icing" || other.gameObject.tag == "Sprinkle")
         {
             if (isUsing)
             {

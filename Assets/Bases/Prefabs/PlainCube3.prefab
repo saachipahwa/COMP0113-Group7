@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 5510841792599158509}
   - component: {fileID: 18305109490354945}
   - component: {fileID: 8309579769222221511}
+  - component: {fileID: 1303198360088186945}
   m_Layer: 0
   m_Name: Bottom
   m_TagString: Cake
@@ -153,6 +154,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!64 &1303198360088186945
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255675997168706209}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5215272023158555896
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +180,7 @@ GameObject:
   - component: {fileID: 3087071983311911930}
   - component: {fileID: 3888681579689125944}
   - component: {fileID: 4063158362096763869}
+  - component: {fileID: 9185402820558463935}
   m_Layer: 0
   m_Name: Middle
   m_TagString: Cake
@@ -250,6 +266,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!64 &9185402820558463935
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5215272023158555896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8979022801316896911
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +292,7 @@ GameObject:
   - component: {fileID: 1680044361846425871}
   - component: {fileID: 6134982901657797690}
   - component: {fileID: 6778288947231629918}
+  - component: {fileID: 4766991515720444147}
   m_Layer: 0
   m_Name: Top
   m_TagString: Cake
@@ -347,3 +378,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!64 &4766991515720444147
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979022801316896911}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
