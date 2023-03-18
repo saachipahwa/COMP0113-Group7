@@ -52,6 +52,14 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
         isPlacing = false;
     }
 
+    public void Throw(Vector3 pos, Quaternion rot)
+    {
+        //Ray r = cam.ScreenPointToRay(attached.transform.position);
+        //Vector3 dir = r.GetPoint(1) - r.GetPoint(0);
+        GameObject spawnedTopping = Instantiate(topping, pos, rot);
+        spawnedTopping.GetComponent<Rigidbody>().velocity = spawnedTopping.transform.forward * 10;
+        isPlacing = false;
+    }
 
     public struct Message
     {
@@ -82,7 +90,15 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
 
         if (isPlacing)
         {
-            placeTopping(transform.position, transform.rotation);
+            if (topping.name == "Sprinkles")
+            {
+                Debug.Log("Throw");
+                Throw(transform.position, transform.rotation);
+            }
+            else
+            {
+                placeTopping(transform.position, transform.rotation);
+            }
         }
     }
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)

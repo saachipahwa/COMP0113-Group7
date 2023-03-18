@@ -97,6 +97,10 @@ public class SpawnPrefabButton : MonoBehaviour
                 var eraser_script = spawnedObject.GetComponent<Eraser>();
                 eraser_script.owner = owner;
                 break;
+            //case 6: //sprinkles
+                //var sprinkle_script = spawnedObject.GetComponent<Sprinkle>();
+                //sprinkle_script.owner = owner;
+               // break;
             default: // toppings
                 var topping_script = spawnedObject.GetComponent<ToppingTool>();
                 topping_script.owner = owner;
