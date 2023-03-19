@@ -9,6 +9,16 @@ public class SprinklesTool : MonoBehaviour, IGraspable, IUseable
     private Vector3 previous;
     private Vector3 velocity;
     public GameObject sprinklePrefab;
+
+    private objectPoolManager ObjectPoolManager;
+
+    void Start()
+    {
+        
+        //ObjectPoolManager = GameObject.FindObjectOfType<objectPoolManager>();
+
+    }
+
     public void Grasp(Hand controller)
     {
         hand = controller;
@@ -27,7 +37,10 @@ public class SprinklesTool : MonoBehaviour, IGraspable, IUseable
     public void Use(Hand controller)
     {
         GameObject spawnedSprinkle = Instantiate(sprinklePrefab, transform.position, transform.rotation);
-        spawnedSprinkle.GetComponent<SprinkleController>().setVelocity(velocity); // add networking to spawn as well on other clients
+
+        //GameObject spawnedSprinkle = ObjectPoolManager.GetObjectFromPool(sprinklePrefab, transform.position, transform.rotation);
+
+        spawnedSprinkle.GetComponent<SprinkleController>().setVelocity(velocity * 2); // add networking to spawn as well on other clients
     }
 
     void Update()
