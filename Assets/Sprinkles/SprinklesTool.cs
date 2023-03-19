@@ -79,10 +79,10 @@ public class SprinklesTool : MonoBehaviour, IGraspable, IUseable
 
     }
     
-}
+
 
     //Can you take a look at this part pls? >> giving error when removing '}' in line 98
-    /*
+    
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
     {
         var msg = message.FromJson<Message>();
@@ -97,5 +97,6 @@ public class SprinklesTool : MonoBehaviour, IGraspable, IUseable
             //transform.rotation = msg.rotation;
         }
     }
-    */
+}
+
 
