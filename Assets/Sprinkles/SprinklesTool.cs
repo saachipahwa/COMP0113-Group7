@@ -14,7 +14,7 @@ public class SprinklesTool : MonoBehaviour, IGraspable, IUseable
     public GameObject sprinklePrefab;
     NetworkContext context;
     private bool isPlacing = false;
-    private bool owner = true; // TODO: REMOVE = true
+    private bool owner;
     public GameObject indicator;
     public Material indicator_material_owner;
     private Color[] colors;
@@ -58,23 +58,16 @@ public class SprinklesTool : MonoBehaviour, IGraspable, IUseable
     
     public void Use(Hand controller)
     {
-        /*
-        GameObject spawnedSprinkle = Instantiate(sprinklePrefab, transform.position, transform.rotation);
-
-        spawnedSprinkle.GetComponent<SprinkleController>().setVelocity(velocity * 2); 
-        */
         isPlacing = true;
     }
 
     public void throwSprinkle(Vector3 handPos, Quaternion handRot, Vector3[] sprinklesPos, int[] colour_index, Vector3 velo)
     {
         GameObject spawnedSprinkles = Instantiate(sprinklePrefab, handPos, handRot);
-        // spawnedSprinkles.GetComponent<SprinkleController>().setVelocity(velocity * 2);
         Transform[] sprinkle_transforms = spawnedSprinkles.GetComponentsInChildren<Transform>();
         for (int i = 1; i < sprinkle_transforms.Length; i++)
         {
             sprinkle_transforms[i].transform.position = sprinklesPos[i-1];
-            // sprinkle_transforms[i].transform.rotation = sprinklesRot[i-1];
             sprinkle_transforms[i].GetComponent<Renderer>().material.color = colors[colour_index[i-1]];
             Rigidbody r = sprinkle_transforms[i].GetComponent<Rigidbody>();
             r.isKinematic = false;

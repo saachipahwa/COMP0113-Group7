@@ -5,9 +5,7 @@ using Ubiq.XR;
 
 public class SprinkleController : MonoBehaviour
 {
-    public Vector3 velo;
     public void setVelocity(Vector3 velocity)
     {
-        velo = velocity;
     }
 }
