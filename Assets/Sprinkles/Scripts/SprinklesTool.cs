@@ -98,7 +98,7 @@ public class SprinklesTool : MonoBehaviour, IGraspable, IUseable
 
     void Update()
     {
-        if (hand)
+        if (hand) // if tool is being grasped, keep the position and rotation the same as the hand and constantly calculate the velocity it is travelling at
         {
             transform.position = hand.transform.position;
             transform.rotation = hand.transform.rotation;
@@ -112,10 +112,10 @@ public class SprinklesTool : MonoBehaviour, IGraspable, IUseable
                 Vector3[] positions = new Vector3[NUMBER_OF_SPRINKLES]; // list of slightly different positions of sprinkles
                 int[] colour_indices = new int[NUMBER_OF_SPRINKLES]; // list of random colours
 
-                for (int i = 0; i < NUMBER_OF_SPRINKLES; i++)
+                for (int i = 0; i < NUMBER_OF_SPRINKLES; i++) // populate the 2 arrays with values
                 {
-                    positions[i] = transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
-                    colour_indices[i] = Random.Range(0, colors.Length);
+                    positions[i] = transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)); // add a random position to spawn the sprinkle
+                    colour_indices[i] = Random.Range(0, colors.Length); // pick a random colour
                 }
                 context.SendJson(new Message() // send all info
                 {
@@ -143,7 +143,6 @@ public class SprinklesTool : MonoBehaviour, IGraspable, IUseable
                 });
             }
         }
-
     }
     
     public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
