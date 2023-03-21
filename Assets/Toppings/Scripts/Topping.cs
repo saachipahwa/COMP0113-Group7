@@ -22,7 +22,7 @@ public class Topping : MonoBehaviour
     // Detects collision with floor and cake and acts accordingly
     private void OnCollisionEnter(Collision other)
     {
-        if (other.collider.tag == "Cake")
+        if (other.collider.tag == "Cake" || other.collider.tag == "Icing" || other.collider.tag == "Sprinkle")
         {
             rigidBody.isKinematic = true; // remove physics of topping
         }
