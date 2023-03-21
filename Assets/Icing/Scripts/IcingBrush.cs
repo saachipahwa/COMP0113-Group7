@@ -20,8 +20,6 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     private bool isTouchingCake = false;
     private bool isUsing = false;
     private Vector3 prevNibPos;
-    private Vector3 lastPosition;
-    private Quaternion lastRotation;
     public GameObject indicator;
     public Material indicator_material_owner;
 
@@ -143,23 +141,18 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
     {
         if (owner)
         {
-            if(lastPosition != transform.position || lastRotation != transform.rotation)
+            context.SendJson(new Message()
             {
-                lastPosition = transform.position;
-                lastRotation = transform.rotation;
-                context.SendJson(new Message()
-                {
-                    position = transform.position,
-                    rotation = transform.rotation,
-                    isIcing = isUsing,
-                    nib_pos = nib.transform.position,
-                    nib_rot = nib.transform.rotation,
-                    name = transform.name,
-                    c_red = colour.r,
-                    c_green = colour.g,
-                    c_blue = colour.b                    
-                });
-            }
+                position = transform.position,
+                rotation = transform.rotation,
+                isIcing = isUsing,
+                nib_pos = nib.transform.position,
+                nib_rot = nib.transform.rotation,
+                name = transform.name,
+                c_red = colour.r,
+                c_green = colour.g,
+                c_blue = colour.b                    
+            });
         }
         if (isUsing)
         {
