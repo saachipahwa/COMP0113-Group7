@@ -14,11 +14,11 @@ public class Sprinkle : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.collider.tag == "Cake")
+        if (other.collider.tag == "Cake" || other.collider.tag == "Icing")
         {
             r.isKinematic = true;
         }
-        else if (other.collider.tag != "Sprinkle")
+        else if (other.collider.tag != "Sprinkle" && other.collider.tag != "Topping") // don't destroy if touching another sprinkle, but don't remove the physics either
         {
             Destroy(gameObject);
         }
