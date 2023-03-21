@@ -59,13 +59,13 @@ public class ToppingTool : MonoBehaviour, IGraspable, IUseable, INetworkSpawnabl
     }
 
     public struct Message
-    /* message contains
-        position of topping
-        rotation of topping
-        what topping it is (name)
-        whether user used tool (placing)
-    */
     {
+        /* message contains
+            position of topping tool
+            rotation of topping tool
+            what topping tool it is (name)
+            whether user used tool (placing)
+        */
         public Vector3 position;
         public Quaternion rotation;
         public string name;

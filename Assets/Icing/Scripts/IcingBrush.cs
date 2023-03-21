@@ -149,8 +149,8 @@ public class IcingBrush : MonoBehaviour, IGraspable, IUseable
                 lastRotation = transform.rotation;
                 context.SendJson(new Message()
                 {
-                    position = transform.localPosition,
-                    rotation = transform.localRotation,
+                    position = transform.position,
+                    rotation = transform.rotation,
                     isIcing = isUsing,
                     nib_pos = nib.transform.position,
                     nib_rot = nib.transform.rotation,
